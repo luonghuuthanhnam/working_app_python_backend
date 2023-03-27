@@ -1,12 +1,13 @@
+import sys
+import os
 import pandas as pd
 from fastapi import FastAPI
 from pydantic import BaseModel
 import json
-from utils import split_gender_dob, gender_pie_chart, joining_date_by_gender, cal_age, province_distribution
+from app.utils import split_gender_dob, gender_pie_chart, joining_date_by_gender, cal_age, province_distribution
 from fastapi.middleware.cors import CORSMiddleware
-import login_signup_handler
-import event_db_handler
-
+import app.login_signup_handler as login_signup_handler
+import app.event_db_handler as event_db_handler
 
 origins = [
     "http://localhost",
@@ -15,7 +16,7 @@ origins = [
     "http://localhost:5000",
 ]
 
-employee_raw_data = pd.read_excel("database\DanhSachThongTinDoanVien.xlsx")
+employee_raw_data = pd.read_excel("app/database/DanhSachThongTinDoanVien.xlsx")
 main_data = employee_raw_data.iloc[5:]
 
 mapping_cols = {
@@ -110,7 +111,7 @@ async def working_app_login(data: LoginData):
 class QueryEventList(BaseModel):
     userId: str
 
-event_db_excel_path = "database\event_db.xlsx"
+event_db_excel_path = "app/database/event_db.xlsx"
 eventDBHandler = event_db_handler.EventDBHandler(event_db_excel_path)
 @app.post("/WorkingApp/Event/EventData")
 async def query_event_list(data: QueryEventList):

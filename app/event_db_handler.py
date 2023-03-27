@@ -38,7 +38,7 @@ class EventDBHandler():
 
 
 class EventHandler():
-    def __init__(self, event_db_excel_file = "database/event/event_db.xlsx") -> None:
+    def __init__(self, event_db_excel_file = "app/database/event/event_db.xlsx") -> None:
         self.event_db_excel_file = event_db_excel_file
         if not os.path.exists(self.event_db_excel_file):
             self.create_event_db_excel_file(event_db_excel_file)
@@ -47,7 +47,7 @@ class EventHandler():
 
 
     
-    def create_event_db_excel_file(self, event_db_excel_file = "database/event/event_db.xlsx"):
+    def create_event_db_excel_file(self, event_db_excel_file = "app/database/event/event_db.xlsx"):
         event_db = pd.DataFrame(columns=["event_id", "created_by", "created_at", "event_data"])
         event_db.to_excel(event_db_excel_file, index=False)
     
