@@ -38,7 +38,7 @@ class EventDBHandler():
 
 
 class EventHandler():
-    def __init__(self, event_db_excel_file = "app/database/event/event_db.xlsx") -> None:
+    def __init__(self, event_db_excel_file = "database/event/event_db.xlsx") -> None:
         self.event_db_excel_file = event_db_excel_file
         if not os.path.exists(self.event_db_excel_file):
             self.create_event_db_excel_file(event_db_excel_file)
@@ -47,7 +47,7 @@ class EventHandler():
 
 
     
-    def create_event_db_excel_file(self, event_db_excel_file = "app/database/event/event_db.xlsx"):
+    def create_event_db_excel_file(self, event_db_excel_file = "database/event/event_db.xlsx"):
         event_db = pd.DataFrame(columns=["event_id", "created_by", "created_at", "event_data"])
         event_db.to_excel(event_db_excel_file, index=False)
     
@@ -56,17 +56,25 @@ class EventHandler():
         event_id = str(uuid.uuid4())
         created_by = user_id
         created_at = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        event_data = {
+        saving_event_data = {
             "event_id": event_id,
+            "event_title": event_data["title"],
             "created_by": created_by,
             "created_at": created_at,
             "event_data": event_data
         }
         event_db = self.event_db.copy()
-        event_db = event_db.append(event_data, ignore_index=True)
+        event_db = event_db.append(saving_event_data, ignore_index=True)
         event_db.to_excel(self.event_db_excel_file, index=False)
         self.event_db = event_db
         event_db.to_excel(self.event_db_excel_file, index=False)
         return event_db
     
+    def reload_event_db(self):
+        self.event_db = pd.read_excel(self.event_db_excel_file, dtype=str)
+        self.event_db = self.event_db.fillna("")
+
+    def query_all_events(self):
+        event_db = self.event_db.copy()
+        return event_db.to_dict()
     
