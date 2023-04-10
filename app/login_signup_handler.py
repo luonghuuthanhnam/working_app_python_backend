@@ -10,3 +10,11 @@ class LoginHandler():
         else:
             user_id = None
         return user_id
+
+    def get_user_info_by_id(self, user_id):
+        result = self.excel_db[self.excel_db["user_id"]==user_id]
+        if len(result) > 0:
+            user_info = result.iloc[0]
+        else:
+            user_info = None
+        return user_info

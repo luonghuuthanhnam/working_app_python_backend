@@ -4,7 +4,13 @@ import pandas as pd
 from fastapi import FastAPI
 from pydantic import BaseModel
 import json
-from utils import split_gender_dob, gender_pie_chart, joining_date_by_gender, cal_age, province_distribution
+from utils import (
+    split_gender_dob,
+    gender_pie_chart,
+    joining_date_by_gender,
+    cal_age,
+    province_distribution,
+)
 from fastapi.middleware.cors import CORSMiddleware
 import login_signup_handler as login_signup_handler
 import event_db_handler as event_db_handler
@@ -47,21 +53,26 @@ mapping_cols = {
     "nguyenquan_matinh": "Unnamed: 24",
 }
 mapping_cols_swap = {v: k for k, v in mapping_cols.items()}
+
+
 class QueryEmployee(BaseModel):
     length: int
+
 
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
-    # allow_origins=origins,
     allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
 @app.get("/")
 def read_root():
     return {"Data_App": "Success"}
+
 
 @app.post("/imployee/query")
 async def employee_query(data: QueryEmployee):
@@ -69,30 +80,34 @@ async def employee_query(data: QueryEmployee):
     if int(length) == -1:
         length = len(main_data)
 
-    result =  main_data.iloc[:int(length)]
+    result = main_data.iloc[: int(length)]
     new_result = result.rename(columns=mapping_cols_swap)
     new_result = new_result.reset_index(drop=True)
-    new_result_js = json.loads(new_result.to_json(orient='records'))
+    new_result_js = json.loads(new_result.to_json(orient="records"))
     new_result_js = split_gender_dob(new_result_js)
 
     pie_dict = gender_pie_chart(new_result)
 
-    joining_by_gender_json = joining_date_by_gender(length, main_data, mapping_cols_swap)
+    joining_by_gender_json = joining_date_by_gender(
+        length, main_data, mapping_cols_swap
+    )
 
     age_distribution = cal_age(length, main_data, mapping_cols_swap)
-    provice_dis = province_distribution(length, main_data, mapping_cols_swap, top = 15)
+    provice_dis = province_distribution(length, main_data, mapping_cols_swap, top=15)
     output_dict = {
         "main_data": new_result_js,
         "pie_chart": pie_dict,
         "joining_by_gender": joining_by_gender_json,
         "age_distribution": age_distribution,
-        "province_distribution": provice_dis
+        "province_distribution": provice_dis,
     }
     return output_dict
+
 
 class LoginData(BaseModel):
     email: str
     password: str
+
 
 loginHandler = login_signup_handler.LoginHandler()
 
@@ -102,24 +117,23 @@ async def working_app_login(data: LoginData):
     email = data.email
     password = data.password
     user_id = loginHandler.login_request(user_name=email, password=password)
-    res_json = {
-        "user_id": user_id
-    }
+    res_json = {"user_id": user_id}
     return res_json
 
 
 class QueryEventList(BaseModel):
     userId: str
 
-event_db_excel_path = "database/event_db.xlsx"
+
+event_db_excel_path = "database/event/event_db.xlsx"
 eventDBHandler = event_db_handler.EventDBHandler(event_db_excel_path)
+
+
 @app.post("/WorkingApp/Event/EventData")
 async def query_event_list(data: QueryEventList):
-    print(data)
     userId = data.userId
     if userId == None:
         return None
-    eventDBHandler
     event_data_dict = eventDBHandler.query_evet_by_userId(userId=userId)
     return event_data_dict
 
@@ -128,15 +142,18 @@ class create_event_data(BaseModel):
     event_data: dict
     user_id: str
 
-eventHandler =  event_db_handler.EventHandler()
+
+eventHandler = event_db_handler.EventHandler()
+
+
 @app.post("/event/create")
 async def create_event_handler(data: create_event_data):
     try:
-        print(data)
         eventHandler.create_event(data.event_data, user_id=data.user_id)
         return {"message": "Create event success"}
     except Exception as e:
         return {"message": "Create event failed"}
+
 
 @app.get("/event/query")
 async def query_event_handler():
@@ -145,3 +162,56 @@ async def query_event_handler():
         return event_data
     except Exception as e:
         return {"message": "Query event failed"}
+
+
+class update_event_data(BaseModel):
+    event_data: dict
+    user_id: str
+
+
+@app.post("/event/update")
+async def upadte_event_handler(data: update_event_data):
+    try:
+        eventHandler.update_event_registing(data.user_id, data.event_data)
+        return {"message": "Create event success"}
+    except Exception as e:
+        return {"message": "Create event failed"}
+
+
+class query_event_data_model(BaseModel):
+    event_id: str
+    user_id: str
+
+
+@app.post("/event/query_registed_data")
+async def query_registed_event_data(data: query_event_data_model):
+    try:
+        registed_data = eventHandler.query_registed_event_data(
+            data.event_id, data.user_id
+        )
+        if registed_data != None:
+            tables = registed_data["tables"]
+            return tables
+        else:
+            return None
+    except Exception as e:
+        return {"message": "Create event failed"}
+
+
+class manager_query_event_data_model(BaseModel):
+    event_id: str
+
+
+@app.post("/event/query_registed_data_manager")
+async def query_registed_event_data_manager(data: manager_query_event_data_model):
+    try:
+        registed_data = eventHandler.query_registed_data_manager(data.event_id)
+        return registed_data
+    except Exception as e:
+        return {"message": "Create event failed"}
+
+
+@app.post("/event/query_table_name_in_event")
+async def query_table_name_in_event(data: manager_query_event_data_model):
+    tables_name = eventHandler.get_table_names_in_event(data.event_id)
+    return tables_name
