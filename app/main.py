@@ -4,6 +4,8 @@ import pandas as pd
 from fastapi import FastAPI
 from pydantic import BaseModel
 import json
+import ssl
+import uvicorn
 from utils import (
     split_gender_dob,
     gender_pie_chart,
@@ -15,6 +17,9 @@ from fastapi.middleware.cors import CORSMiddleware
 import login_signup_handler as login_signup_handler
 import event_db_handler as event_db_handler
 
+ssl_context = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
+ssl_context.load_cert_chain("/home/ubuntu/luongnam/working_space/working_app_python_backend/app/server.crt", "/home/ubuntu/luongnam/working_space/working_app_python_backend/app/server.key", "/home/ubuntu/luongnam/working_space/working_app_python_backend/app/server.pem")
+# ssl_context.load_cert_chain()
 origins = [
     "http://localhost",
     "http://localhost:8000",
@@ -71,6 +76,7 @@ app.add_middleware(
 
 @app.get("/")
 def read_root():
+    print("heelo")
     return {"Data_App": "Success"}
 
 
@@ -123,7 +129,6 @@ async def working_app_login(data: LoginData):
 
 class QueryEventList(BaseModel):
     userId: str
-
 
 event_db_excel_path = "database/event/event_db.xlsx"
 eventDBHandler = event_db_handler.EventDBHandler(event_db_excel_path)
@@ -198,20 +203,31 @@ async def query_registed_event_data(data: query_event_data_model):
         return {"message": "Create event failed"}
 
 
-class manager_query_event_data_model(BaseModel):
+class manager_query_table_model(BaseModel):
     event_id: str
+    table_id: str
 
-
-@app.post("/event/query_registed_data_manager")
-async def query_registed_event_data_manager(data: manager_query_event_data_model):
+@app.post("/event/query_registed_table_by_manager")
+async def query_registed_event_data_manager(data: manager_query_table_model):
     try:
-        registed_data = eventHandler.query_registed_data_manager(data.event_id)
-        return registed_data
+        registed_table = eventHandler.query_registed_data_manager(data.event_id, data.table_id)
+        return registed_table
     except Exception as e:
         return {"message": "Create event failed"}
 
+# class manager_query_event_data_model (BaseModel):
+#         event_id: str
+# @app.post("/event/query_table_name_in_event")
+# async def query_table_name_in_event(data: manager_query_event_data_model):
+#     tables_name = eventHandler.get_table_names_in_event(data.event_id)
+#     return tables_name
 
-@app.post("/event/query_table_name_in_event")
-async def query_table_name_in_event(data: manager_query_event_data_model):
-    tables_name = eventHandler.get_table_names_in_event(data.event_id)
-    return tables_name
+if __name__ == "__main__":
+    uvicorn.run(
+        app,
+        host="0.0.0.0",
+        port=8000,
+        ssl_version=ssl.PROTOCOL_TLS,
+        ssl_keyfile="/home/ubuntu/luongnam/working_space/working_app_python_backend/app/server.key",
+        ssl_certfile="/home/ubuntu/luongnam/working_space/working_app_python_backend/app/server.crt",
+    )
