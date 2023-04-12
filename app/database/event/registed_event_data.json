@@ -1,5 +1,5 @@
 {
-    "19031998": {
+    "GroupID_a330f381-4e38-4a93-a0c9-f194425aabf8": {
         "d8dca5f0-58f2-4061-9498-c2b1a8da882c": {
             "id": "d8dca5f0-58f2-4061-9498-c2b1a8da882c",
             "title": "Hội Thao 2023",
@@ -14,17 +14,17 @@
                     "data": [
                         {
                             "key": "0",
-                            "Mã nhân viên": "lhtn001",
-                            "Tên": "Lương Hữu Thành Nam",
-                            "Vị trí": "Hậu vệ",
-                            "Số áo": "04"
+                            "Mã nhân viên": "...",
+                            "Tên": "adsf",
+                            "Vị trí": "ágd",
+                            "Số áo": "ádf"
                         },
                         {
                             "key": "19031998-1",
-                            "Mã nhân viên": "xxaiosfh",
-                            "Tên": "ỤIKDGHFKJASBIUB",
-                            "Vị trí": "Tiền đạo",
-                            "Số áo": "10"
+                            "Mã nhân viên": "àgds",
+                            "Tên": "3refd",
+                            "Vị trí": "c sadf",
+                            "Số áo": "fdgsdfg sdfgsdfg"
                         }
                     ],
                     "table_id": "ab9b88d8-86ed-47c6-a74a-b47281d97538"
@@ -34,15 +34,21 @@
                     "data": [
                         {
                             "key": "0",
-                            "Mã nhân viên": "ádfgaw",
-                            "Tên": "efasd",
-                            "giới tính": "gasdfsa"
+                            "Mã nhân viên": "...a aadsfdsfsf ",
+                            "Tên": "qw4t24qa ",
+                            "giới tính": "ádf"
+                        },
+                        {
+                            "key": "19031998-1",
+                            "Mã nhân viên": "...agsdasd",
+                            "Tên": "q2a3eawf",
+                            "giới tính": "gdads"
                         }
                     ],
                     "table_id": "4e4eea51-03fe-4ed4-8039-ae0aaa97b153"
                 }
             ],
-            "updated_at": "2023-04-05T10:56:39.743Z"
+            "updated_at": "2023-04-12T15:16:14.332Z"
         },
         "2696e973-26ca-4ee1-b851-80e652316441": {
             "id": "2696e973-26ca-4ee1-b851-80e652316441",
@@ -58,10 +64,10 @@
                     "data": [
                         {
                             "key": "0",
-                            "Mã nhân viên": "...",
-                            "Tên": "...",
-                            "Tiết mục": "...",
-                            "Thời gian dự tính": "..."
+                            "Mã nhân viên": "dsafads",
+                            "Tên": " ádfasd",
+                            "Tiết mục": "sdaf",
+                            "Thời gian dự tính": "efa"
                         }
                     ],
                     "table_id": "22a206c4-9de8-489d-915c-0f4a1e5c543c"
@@ -71,20 +77,28 @@
                     "data": [
                         {
                             "key": "0",
-                            "Mã nhân viên": "...",
-                            "Tên": "...",
-                            "Tiết mục": "...",
-                            "thời gian dự tính": "...",
-                            "Link nhạc": "..."
+                            "Mã nhân viên": " éefdsafasdf",
+                            "Tên": "q2aaw4f3423qf",
+                            "Tiết mục": "dasgdsafv",
+                            "thời gian dự tính": "asdf asd fasdfadsf ",
+                            "Link nhạc": "asdadsfadsfadsfadgasdgaw èaseddsaf"
+                        },
+                        {
+                            "key": "19031998-1",
+                            "Mã nhân viên": "cq324ecd",
+                            "Tên": "szdfads",
+                            "Tiết mục": "adg",
+                            "thời gian dự tính": "...ádf",
+                            "Link nhạc": "adsghyt"
                         }
                     ],
                     "table_id": "347b1699-c676-43e0-8a36-a6e3a11ba4f9"
                 }
             ],
-            "updated_at": "2023-04-10T15:37:13.797Z"
+            "updated_at": "2023-04-12T15:16:48.082Z"
         }
     },
-    "user002": {
+    "GroupID_990381bf-777a-4622-baba-0695fbf477dd": {
         "d8dca5f0-58f2-4061-9498-c2b1a8da882c": {
             "id": "d8dca5f0-58f2-4061-9498-c2b1a8da882c",
             "title": "Hội Thao 2023",
@@ -147,6 +161,67 @@
                 }
             ],
             "updated_at": "2023-04-11T14:46:45.141Z"
+        },
+        "2696e973-26ca-4ee1-b851-80e652316441": {
+            "id": "2696e973-26ca-4ee1-b851-80e652316441",
+            "title": "Văn nghệ chào mừng 2023",
+            "created_at": "2023-04-05 17:40:48",
+            "created_by": "19031998",
+            "from_date": "2023-06-22",
+            "to_date": "2023-06-23",
+            "description": "Buổi biểu diễn văn nghệ",
+            "tables": [
+                {
+                    "name": "Hát",
+                    "data": [
+                        {
+                            "key": "0",
+                            "Mã nhân viên": "ằ3",
+                            "Tên": "1",
+                            "Tiết mục": "234",
+                            "Thời gian dự tính": "4136"
+                        },
+                        {
+                            "key": "user002-1",
+                            "Mã nhân viên": "...",
+                            "Tên": "...",
+                            "Tiết mục": "...",
+                            "Thời gian dự tính": "..."
+                        },
+                        {
+                            "key": "user002-2",
+                            "Mã nhân viên": "...",
+                            "Tên": "b256",
+                            "Tiết mục": "...",
+                            "Thời gian dự tính": "v43"
+                        }
+                    ],
+                    "table_id": "22a206c4-9de8-489d-915c-0f4a1e5c543c"
+                },
+                {
+                    "name": "Nhảy - múa",
+                    "data": [
+                        {
+                            "key": "0",
+                            "Mã nhân viên": "ưeytrhfg",
+                            "Tên": "w45g2454wư3",
+                            "Tiết mục": "2w45yn yn5y",
+                            "thời gian dự tính": "bt25tb25t",
+                            "Link nhạc": "6t23456326"
+                        },
+                        {
+                            "key": "user002-1",
+                            "Mã nhân viên": "245",
+                            "Tên": "47",
+                            "Tiết mục": "435",
+                            "thời gian dự tính": "v342...",
+                            "Link nhạc": "v234"
+                        }
+                    ],
+                    "table_id": "347b1699-c676-43e0-8a36-a6e3a11ba4f9"
+                }
+            ],
+            "updated_at": "2023-04-12T15:17:38.923Z"
         }
     }
 }

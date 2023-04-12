@@ -174,35 +174,37 @@ async def query_event_handler():
 class update_event_data(BaseModel):
     event_data: dict
     user_id: str
+    group_id: str
+
 
 
 @app.post("/event/update")
 async def upadte_event_handler(data: update_event_data):
     try:
-        eventHandler.update_event_registing(data.user_id, data.event_data)
-        return {"message": "Create event success"}
+        eventHandler.update_event_registing(data.user_id, data.group_id, data.event_data)
+        return {"message": "Update event success"}
     except Exception as e:
-        return {"message": "Create event failed"}
+        return {"message": "Update event failed"}
 
 
 class query_event_data_model(BaseModel):
     event_id: str
-    user_id: str
+    group_id: str
 
 
 @app.post("/event/query_registed_data")
 async def query_registed_event_data(data: query_event_data_model):
-    try:
+    # try:
         registed_data = eventHandler.query_registed_event_data(
-            data.event_id, data.user_id
+            data.event_id, data.group_id
         )
         if registed_data != None:
             tables = registed_data["tables"]
             return tables
         else:
             return None
-    except Exception as e:
-        return {"message": "Create event failed"}
+    # except Exception as e:
+    #     return {"message": "Query event failed"}
 
 
 class manager_query_table_model(BaseModel):
@@ -212,11 +214,12 @@ class manager_query_table_model(BaseModel):
 async def query_registed_event_data_manager(data: manager_query_table_model):
     # try:
         registed_table_df = eventHandler.get_table_data_by_manager(data.table_id)
-        registed_table_df["group_name"] = registed_table_df["group_id"].apply(
+        temp_group_name = registed_table_df["group_id"].apply(
             lambda x: groupData.get_group_name(x)
         )
+        registed_table_df["group_name"] = temp_group_name
         registed_table_df = registed_table_df.drop(columns=["event_id", "table_id", "key", "group_id"])
-        registed_table_df.rename(columns={"group_name": "group_id"}, inplace=True)
+        # registed_table_df.rename(columns={"group_name": "group_id"}, inplace=True)
         registed_table = registed_table_df.to_dict(orient="records")
         return registed_table
     # except Exception as e:
@@ -233,7 +236,7 @@ if __name__ == "__main__":
     uvicorn.run(
         app,
         host="0.0.0.0",
-        port=8005,
+        port=8005
         # ssl_version=ssl.PROTOCOL_TLS,
         # ssl_keyfile="/home/ubuntu/luongnam/working_space/working_app_python_backend/app/server.key",
         # ssl_certfile="/home/ubuntu/luongnam/working_space/working_app_python_backend/app/server.crt",

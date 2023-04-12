@@ -50,11 +50,9 @@ class EventHandler():
         self.event_db = pd.read_excel(self.event_db_excel_file, dtype=str)
         self.event_db = self.event_db.fillna("")
 
-    
     def create_event_db_excel_file(self, event_db_excel_file = "database/event/event_db.xlsx"):
         event_db = pd.DataFrame(columns=["event_id", "created_by", "created_at", "event_data"])
         event_db.to_excel(event_db_excel_file, index=False)
-    
 
     def create_event(self, event_data, user_id):
         event_id = str(uuid.uuid4())
@@ -93,20 +91,23 @@ class EventHandler():
             data = defaultdict(dict)
         return data
     
-    def update_event_registing(self, updating_user_id, update_data):
+    def update_event_registing(self, updating_user_id, group_id, update_data):
         data = self.try_reload_resigted_event_data()
-        data[updating_user_id][update_data["id"]] = update_data
+        data[group_id][update_data["id"]] = update_data
         with open(self.registed_event_data_path, 'w', encoding="utf-8") as f:
             print("FR)")
             json.dump(data, f, ensure_ascii=False, indent=4)
 
-    def query_registed_event_data(self, event_id, user_id):
+    def query_registed_event_data(self, event_id, group_id):
+        print("event_id", event_id)
+        print("group_id", group_id)
         data = self.try_reload_resigted_event_data()
         out_data = None
         try:
-            out_data = data[user_id][event_id]
+            out_data = data[group_id][event_id]
+            print("out_data", out_data)
         except:
-            print(f"Cannot query event {event_id} data from {user_id}")
+            print(f"Cannot query event {event_id} data from {group_id}")
         return out_data
     
     def get_table_names_in_event(self, event_id):

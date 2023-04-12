@@ -106,6 +106,8 @@ def province_distribution(length, main_data, top = -1):
         result_df = result_df[:top]
     return result_df.to_json(orient="records")
 
+from login_signup_handler import LoginHandler
+loginHandler = LoginHandler()
 class GroupData():
     def __init__(self, group_data_excel_path) -> None:
         self.group_data_excel_path = group_data_excel_path
@@ -115,9 +117,18 @@ class GroupData():
         self.group_data_df = pd.read_excel(self.group_data_excel_path)
 
     def get_group_name(self, group_id):
+        print("group_id", group_id)
         group_name = self.group_data_df[self.group_data_df["group_id"] == group_id]["group_name"].values[0]
         return group_name
 
     def get_group_id(self, group_name):
         group_id = self.group_data_df[self.group_data_df["group_name"] == group_name]["group_id"].values[0]
         return group_id
+
+    def get_group_id_by_user_id(self, user_id):
+        user_info = loginHandler.get_user_info_by_id(user_id)
+        if user_info != None:
+            group_id = user_info["group_id"]
+            return group_id
+        else:
+            return None
