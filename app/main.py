@@ -7,11 +7,12 @@ import json
 import ssl
 import uvicorn
 from utils import (
-    split_gender_dob,
+    # split_gender_dob,
     gender_pie_chart,
     joining_date_by_gender,
     cal_age,
     province_distribution,
+    GroupData
 )
 from fastapi.middleware.cors import CORSMiddleware
 import login_signup_handler as login_signup_handler
@@ -27,38 +28,39 @@ origins = [
     "http://localhost:5000",
 ]
 
-employee_raw_data = pd.read_excel("database/DanhSachThongTinDoanVien.xlsx")
-main_data = employee_raw_data.iloc[5:]
+# employee_raw_data = pd.read_excel("database/DanhSachThongTinDoanVien.xlsx")
+main_data = pd.read_excel("database/final_employee_data.xlsx")
+groupData = GroupData("database/group_data.xlsx")
+# main_data = employee_raw_data.iloc[5:]
 
-mapping_cols = {
-    "stt": "Unnamed: 0",
-    "maso_doanvien": "Unnamed: 1",
-    "hovaten": "Unnamed: 2",
-    "ngaysinh_nam": "Unnamed: 3",
-    "ngaysinh_nu": "Unnamed: 4",
-    "tinh": "Unnamed: 5",
-    "matinh": "Unnamed: 6",
-    "cmnd": "Unnamed: 7",
-    "huongluong_ngansach": "Unnamed: 8",
-    "huongluong_ngoaingansach": "Unnamed: 9",
-    "khongchuyentrach": "Unnamed: 10",
-    "chutich": "Unnamed: 11",
-    "phochutich": "Unnamed: 12",
-    "uvbch": "Unnamed: 13",
-    "totruong": "Unnamed: 14",
-    "topho": "Unnamed: 15",
-    "cb_cdcs": "Unnamed: 16",
-    "vuvbkt": "Unnamed: 17",
-    "ngayvao_congdoan": "Unnamed: 18",
-    "Unnamed_19": "Unnamed: 19",
-    "Unnamed_20": "Unnamed: 20",
-    "Unnamed_21": "Unnamed: 21",
-    "Unnamed_22": "Unnamed: 22",
-    "nguyenquan_tinh": "Unnamed: 23",
-    "nguyenquan_matinh": "Unnamed: 24",
-}
-mapping_cols_swap = {v: k for k, v in mapping_cols.items()}
-
+# mapping_cols = {
+#     "stt": "Unnamed: 0",
+#     "maso_doanvien": "Unnamed: 1",
+#     "hovaten": "Unnamed: 2",
+#     "ngaysinh_nam": "Unnamed: 3",
+#     "ngaysinh_nu": "Unnamed: 4",
+#     "tinh": "Unnamed: 5",
+#     "matinh": "Unnamed: 6",
+#     "cmnd": "Unnamed: 7",
+#     "huongluong_ngansach": "Unnamed: 8",
+#     "huongluong_ngoaingansach": "Unnamed: 9",
+#     "khongchuyentrach": "Unnamed: 10",
+#     "chutich": "Unnamed: 11",
+#     "phochutich": "Unnamed: 12",
+#     "uvbch": "Unnamed: 13",
+#     "totruong": "Unnamed: 14",
+#     "topho": "Unnamed: 15",
+#     "cb_cdcs": "Unnamed: 16",
+#     "vuvbkt": "Unnamed: 17",
+#     "ngayvao_congdoan": "Unnamed: 18",
+#     "Unnamed_19": "Unnamed: 19",
+#     "Unnamed_20": "Unnamed: 20",
+#     "Unnamed_21": "Unnamed: 21",
+#     "Unnamed_22": "Unnamed: 22",
+#     "nguyenquan_tinh": "Unnamed: 23",
+#     "nguyenquan_matinh": "Unnamed: 24",
+# }
+# mapping_cols_swap = {v: k for k, v in mapping_cols.items()}
 
 class QueryEmployee(BaseModel):
     length: int
@@ -85,21 +87,18 @@ async def employee_query(data: QueryEmployee):
     length = data.length
     if int(length) == -1:
         length = len(main_data)
-
     result = main_data.iloc[: int(length)]
-    new_result = result.rename(columns=mapping_cols_swap)
-    new_result = new_result.reset_index(drop=True)
+    new_result = result.reset_index(drop=True)
     new_result_js = json.loads(new_result.to_json(orient="records"))
-    new_result_js = split_gender_dob(new_result_js)
-
     pie_dict = gender_pie_chart(new_result)
 
     joining_by_gender_json = joining_date_by_gender(
-        length, main_data, mapping_cols_swap
+        length, main_data
     )
 
-    age_distribution = cal_age(length, main_data, mapping_cols_swap)
-    provice_dis = province_distribution(length, main_data, mapping_cols_swap, top=15)
+    age_distribution = cal_age(length, main_data)
+    provice_dis = province_distribution(length, main_data, top=15)
+    
     output_dict = {
         "main_data": new_result_js,
         "pie_chart": pie_dict,
@@ -107,6 +106,7 @@ async def employee_query(data: QueryEmployee):
         "age_distribution": age_distribution,
         "province_distribution": provice_dis,
     }
+    # print("output_dict", output_dict)
     return output_dict
 
 
@@ -122,9 +122,11 @@ loginHandler = login_signup_handler.LoginHandler()
 async def working_app_login(data: LoginData):
     email = data.email
     password = data.password
-    user_id = loginHandler.login_request(user_name=email, password=password)
-    res_json = {"user_id": user_id}
-    return res_json
+    login_detail = loginHandler.login_request(user_name=email, password=password)
+    if login_detail != None:
+        return login_detail
+    else:
+        return None
 
 
 class QueryEventList(BaseModel):
@@ -210,7 +212,11 @@ class manager_query_table_model(BaseModel):
 async def query_registed_event_data_manager(data: manager_query_table_model):
     # try:
         registed_table_df = eventHandler.get_table_data_by_manager(data.table_id)
-        registed_table_df = registed_table_df.drop(columns=["event_id", "table_id", "key"])
+        registed_table_df["group_name"] = registed_table_df["group_id"].apply(
+            lambda x: groupData.get_group_name(x)
+        )
+        registed_table_df = registed_table_df.drop(columns=["event_id", "table_id", "key", "group_id"])
+        registed_table_df.rename(columns={"group_name": "group_id"}, inplace=True)
         registed_table = registed_table_df.to_dict(orient="records")
         return registed_table
     # except Exception as e:
@@ -227,7 +233,7 @@ if __name__ == "__main__":
     uvicorn.run(
         app,
         host="0.0.0.0",
-        port=8000,
+        port=8005,
         # ssl_version=ssl.PROTOCOL_TLS,
         # ssl_keyfile="/home/ubuntu/luongnam/working_space/working_app_python_backend/app/server.key",
         # ssl_certfile="/home/ubuntu/luongnam/working_space/working_app_python_backend/app/server.crt",

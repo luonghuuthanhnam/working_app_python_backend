@@ -109,26 +109,6 @@ class EventHandler():
             print(f"Cannot query event {event_id} data from {user_id}")
         return out_data
     
-    # def query_registed_data_manager(self, event_id):
-    #     data = self.try_reload_resigted_event_data()
-    #     out_data = defaultdict(dict)
-    #     # try:
-    #     user_ids = data.keys()
-    #     for each_user_id in user_ids:
-    #         user_infor = loginHandler.get_user_info_by_id(each_user_id)
-    #         if event_id in data[each_user_id].keys():
-    #             tables_data = data[each_user_id][event_id]["tables"]
-    #             new_tables_data = []
-    #             for each_table in tables_data:
-    #                 each_table_data = each_table["data"]
-    #                 for idx in range(len(each_table_data)):
-    #                     each_table_data[idx]["thêm bởi"] = user_infor["email"]
-    #                 new_tables_data.append(each_table_data)
-    #             out_data["tables"] = new_tables_data
-    #     # except:
-    #     #     print(f"Cannot query event {event_id}")
-    #     return out_data
-    
     def get_table_names_in_event(self, event_id):
         event_db = self.event_db.copy()
         event_data = event_db[event_db["event_id"] == event_id]
