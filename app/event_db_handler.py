@@ -109,25 +109,25 @@ class EventHandler():
             print(f"Cannot query event {event_id} data from {user_id}")
         return out_data
     
-    def query_registed_data_manager(self, event_id):
-        data = self.try_reload_resigted_event_data()
-        out_data = defaultdict(dict)
-        # try:
-        user_ids = data.keys()
-        for each_user_id in user_ids:
-            user_infor = loginHandler.get_user_info_by_id(each_user_id)
-            if event_id in data[each_user_id].keys():
-                tables_data = data[each_user_id][event_id]["tables"]
-                new_tables_data = []
-                for each_table in tables_data:
-                    each_table_data = each_table["data"]
-                    for idx in range(len(each_table_data)):
-                        each_table_data[idx]["thêm bởi"] = user_infor["email"]
-                    new_tables_data.append(each_table_data)
-                out_data["tables"] = new_tables_data
-        # except:
-        #     print(f"Cannot query event {event_id}")
-        return out_data
+    # def query_registed_data_manager(self, event_id):
+    #     data = self.try_reload_resigted_event_data()
+    #     out_data = defaultdict(dict)
+    #     # try:
+    #     user_ids = data.keys()
+    #     for each_user_id in user_ids:
+    #         user_infor = loginHandler.get_user_info_by_id(each_user_id)
+    #         if event_id in data[each_user_id].keys():
+    #             tables_data = data[each_user_id][event_id]["tables"]
+    #             new_tables_data = []
+    #             for each_table in tables_data:
+    #                 each_table_data = each_table["data"]
+    #                 for idx in range(len(each_table_data)):
+    #                     each_table_data[idx]["thêm bởi"] = user_infor["email"]
+    #                 new_tables_data.append(each_table_data)
+    #             out_data["tables"] = new_tables_data
+    #     # except:
+    #     #     print(f"Cannot query event {event_id}")
+    #     return out_data
     
     def get_table_names_in_event(self, event_id):
         event_db = self.event_db.copy()
@@ -139,3 +139,28 @@ class EventHandler():
         table_names = [each["name"] for each in selected_event_data["tables_data"]]
         # table_names = event_data["table_names"]
         return table_names
+    
+    def transform_table_data(self):
+        raw_data = json.load(open(self.registed_event_data_path, "r", encoding="utf-8"))
+        user_ids = raw_data.keys()
+
+        total_table_data = defaultdict(list)
+        for each_user in user_ids:
+            group_data = raw_data[each_user]
+            for each_event in group_data:
+                event_data = group_data[each_event]
+                for each_table in event_data["tables"]:
+                    table_id = each_table["table_id"]
+                    table_data = each_table["data"]
+                    for each_row in table_data:
+                        cur_row = each_row
+                        cur_row["event_id"] = each_event
+                        cur_row["group_id"] = each_user
+                        cur_row["table_id"] = table_id
+                        total_table_data[table_id].append(cur_row)
+        return total_table_data
+
+    def get_table_data_by_manager(self, selected_table_id):
+        total_table_data = self.transform_table_data()
+        table_df = pd.DataFrame.from_dict(total_table_data[selected_table_id])
+        return table_df

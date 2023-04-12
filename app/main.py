@@ -17,8 +17,8 @@ from fastapi.middleware.cors import CORSMiddleware
 import login_signup_handler as login_signup_handler
 import event_db_handler as event_db_handler
 
-ssl_context = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
-ssl_context.load_cert_chain("/home/ubuntu/luongnam/working_space/working_app_python_backend/app/server.crt", "/home/ubuntu/luongnam/working_space/working_app_python_backend/app/server.key", "/home/ubuntu/luongnam/working_space/working_app_python_backend/app/server.pem")
+# ssl_context = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
+# ssl_context.load_cert_chain("server.crt", "server.key", "server.pem")
 # ssl_context.load_cert_chain()
 origins = [
     "http://localhost",
@@ -204,16 +204,17 @@ async def query_registed_event_data(data: query_event_data_model):
 
 
 class manager_query_table_model(BaseModel):
-    event_id: str
     table_id: str
 
 @app.post("/event/query_registed_table_by_manager")
 async def query_registed_event_data_manager(data: manager_query_table_model):
-    try:
-        registed_table = eventHandler.query_registed_data_manager(data.event_id, data.table_id)
+    # try:
+        registed_table_df = eventHandler.get_table_data_by_manager(data.table_id)
+        registed_table_df = registed_table_df.drop(columns=["event_id", "table_id", "key"])
+        registed_table = registed_table_df.to_dict(orient="records")
         return registed_table
-    except Exception as e:
-        return {"message": "Create event failed"}
+    # except Exception as e:
+    #     return {"message": "Create event failed"}
 
 # class manager_query_event_data_model (BaseModel):
 #         event_id: str
@@ -227,7 +228,7 @@ if __name__ == "__main__":
         app,
         host="0.0.0.0",
         port=8000,
-        ssl_version=ssl.PROTOCOL_TLS,
-        ssl_keyfile="/home/ubuntu/luongnam/working_space/working_app_python_backend/app/server.key",
-        ssl_certfile="/home/ubuntu/luongnam/working_space/working_app_python_backend/app/server.crt",
+        # ssl_version=ssl.PROTOCOL_TLS,
+        # ssl_keyfile="/home/ubuntu/luongnam/working_space/working_app_python_backend/app/server.key",
+        # ssl_certfile="/home/ubuntu/luongnam/working_space/working_app_python_backend/app/server.crt",
     )
