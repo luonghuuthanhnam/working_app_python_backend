@@ -78,7 +78,6 @@ app.add_middleware(
 
 @app.get("/")
 def read_root():
-    print("heelo")
     return {"Data_App": "Success"}
 
 
@@ -106,7 +105,6 @@ async def employee_query(data: QueryEmployee):
         "age_distribution": age_distribution,
         "province_distribution": provice_dis,
     }
-    # print("output_dict", output_dict)
     return output_dict
 
 

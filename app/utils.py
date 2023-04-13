@@ -117,7 +117,6 @@ class GroupData():
         self.group_data_df = pd.read_excel(self.group_data_excel_path)
 
     def get_group_name(self, group_id):
-        print("group_id", group_id)
         group_name = self.group_data_df[self.group_data_df["group_id"] == group_id]["group_name"].values[0]
         return group_name
 

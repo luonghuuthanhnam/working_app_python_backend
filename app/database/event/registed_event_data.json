@@ -13,18 +13,74 @@
                     "name": "Bóng đá",
                     "data": [
                         {
-                            "key": "0",
-                            "Mã nhân viên": "...",
-                            "Tên": "adsf",
-                            "Vị trí": "ágd",
-                            "Số áo": "ádf"
+                            "key": "83a0e4cb-10be-47e9-85ac-0b38fac97f14",
+                            "Mã nhân viên": "000005178499",
+                            "Tên": "Nguyễn Thị Thu Sương",
+                            "Vị trí": "Tiền vệ",
+                            "Số áo": "9"
                         },
                         {
-                            "key": "19031998-1",
-                            "Mã nhân viên": "àgds",
-                            "Tên": "3refd",
-                            "Vị trí": "c sadf",
-                            "Số áo": "fdgsdfg sdfgsdfg"
+                            "key": "a5eac03c-faae-41d4-8878-3fed246e7cf6",
+                            "Mã nhân viên": "000005180380",
+                            "Tên": "Danh Thị Phương Thảo",
+                            "Vị trí": "Tiền vệ",
+                            "Số áo": "26"
+                        },
+                        {
+                            "key": "ea19edd9-6b60-4c3e-a22d-8baeece34ee3",
+                            "Mã nhân viên": "000005178196",
+                            "Tên": "Lưu Hoàng Dũng",
+                            "Vị trí": "Trung vệ phòng ngự",
+                            "Số áo": "14"
+                        },
+                        {
+                            "key": "39d9dd7c-d704-4516-ab08-b1d7bf8f9d47",
+                            "Mã nhân viên": "000005178523",
+                            "Tên": "Nguyễn Thị Mỹ Lê",
+                            "Vị trí": "Tiền vệ",
+                            "Số áo": "16"
+                        },
+                        {
+                            "key": "35525c90-e503-41d8-9c16-25a802517291",
+                            "Mã nhân viên": "000005178142",
+                            "Tên": "Nguyễn Thanh Thản",
+                            "Vị trí": "Tiền đạo",
+                            "Số áo": "13"
+                        },
+                        {
+                            "key": "840f3e68-646e-4c61-9262-9d2f8c6e87c1",
+                            "Mã nhân viên": "000005178212",
+                            "Tên": "Diệp Thế Cường",
+                            "Vị trí": "Thủ môn",
+                            "Số áo": "4"
+                        },
+                        {
+                            "key": "2eb26ac9-753a-41db-a892-ec29fe046513",
+                            "Mã nhân viên": "000005178155",
+                            "Tên": "Bùi Xuân Quí",
+                            "Vị trí": "Tiền đạo",
+                            "Số áo": "23"
+                        },
+                        {
+                            "key": "92312486-edce-4082-a158-9c5454705c3b",
+                            "Mã nhân viên": "000005178441",
+                            "Tên": "Trần Hữu Việt",
+                            "Vị trí": "Tiền vệ",
+                            "Số áo": "10"
+                        },
+                        {
+                            "key": "0dec65ef-7968-44ad-bbfc-b61124f16c3e",
+                            "Mã nhân viên": "000005178438",
+                            "Tên": "Nguyễn Văn Nhẫn",
+                            "Vị trí": "Trung phong",
+                            "Số áo": "29"
+                        },
+                        {
+                            "key": "94ad308c-218b-45f4-a768-0542e1868c11",
+                            "Mã nhân viên": "000005178296",
+                            "Tên": "Võ Duy Khanh",
+                            "Vị trí": "Tiền vệ",
+                            "Số áo": "3"
                         }
                     ],
                     "table_id": "ab9b88d8-86ed-47c6-a74a-b47281d97538"
@@ -112,25 +168,60 @@
                     "name": "Bóng đá",
                     "data": [
                         {
-                            "key": "0",
-                            "Mã nhân viên": "LHTN_CODE",
-                            "Tên": "LHTN",
-                            "Vị trí": "Thủ môn",
-                            "Số áo": "01"
+                            "key": "c8a7b92e-a199-4eea-92ff-da853b2828d2",
+                            "Mã nhân viên": "000005178417",
+                            "Tên": "Đinh Ngọc Thùy Trang",
+                            "Vị trí": "Trung vệ",
+                            "Số áo": "8"
                         },
                         {
-                            "key": "user002-1",
-                            "Mã nhân viên": "code2",
-                            "Tên": "PGL",
+                            "key": "2bb16d76-50e0-4228-b5ab-648d320c52cb",
+                            "Mã nhân viên": "000006556843",
+                            "Tên": "Đỗ Hồng Xuân",
                             "Vị trí": "Tiền vệ",
-                            "Số áo": "06"
+                            "Số áo": "19"
                         },
                         {
-                            "key": "user002-2",
-                            "Mã nhân viên": "code3",
-                            "Tên": "SV",
-                            "Vị trí": "Tiền đạo",
-                            "Số áo": "10"
+                            "key": "3bb980a7-3eb3-433f-9537-3d2d0c945c34",
+                            "Mã nhân viên": "000005178553",
+                            "Tên": "Hồ Anh Kiệt",
+                            "Vị trí": "Trung vệ",
+                            "Số áo": "4"
+                        },
+                        {
+                            "key": "9f20a807-dd86-43f7-9880-90a6fa2f3498",
+                            "Mã nhân viên": "000005180401",
+                            "Tên": "Nguyễn Quang Thoại",
+                            "Vị trí": "Tiền vệ",
+                            "Số áo": "23"
+                        },
+                        {
+                            "key": "a767b33e-e8dd-43b2-b952-2f229d43da58",
+                            "Mã nhân viên": "000005178452",
+                            "Tên": "Nguyễn Như Quỳnh",
+                            "Vị trí": "Trung vệ",
+                            "Số áo": "12"
+                        },
+                        {
+                            "key": "4c2ab5fd-ab6b-4cf5-b795-0211ecbe7b0d",
+                            "Mã nhân viên": "000005178435",
+                            "Tên": "Trương Trung Tín",
+                            "Vị trí": "Trung vệ",
+                            "Số áo": "29"
+                        },
+                        {
+                            "key": "129f990c-af46-4dfa-a3bb-4b3301f11fbf",
+                            "Mã nhân viên": "000005178132",
+                            "Tên": "Lê Hồng Mỹ",
+                            "Vị trí": "Hậu vệ",
+                            "Số áo": "5"
+                        },
+                        {
+                            "key": "534261cc-98e6-427f-9f0d-755a39cbf98e",
+                            "Mã nhân viên": "000005178271",
+                            "Tên": "Võ Ngọc Hải",
+                            "Vị trí": "Tiền vệ",
+                            "Số áo": "22"
                         }
                     ],
                     "table_id": "ab9b88d8-86ed-47c6-a74a-b47281d97538"
@@ -160,7 +251,7 @@
                     "table_id": "4e4eea51-03fe-4ed4-8039-ae0aaa97b153"
                 }
             ],
-            "updated_at": "2023-04-11T14:46:45.141Z"
+            "updated_at": "2023-04-13T07:06:28.193Z"
         },
         "2696e973-26ca-4ee1-b851-80e652316441": {
             "id": "2696e973-26ca-4ee1-b851-80e652316441",
@@ -222,6 +313,94 @@
                 }
             ],
             "updated_at": "2023-04-12T15:17:38.923Z"
+        }
+    },
+    "GroupID_9106a6c0-7ed2-488e-83db-149993c458ba": {
+        "d8dca5f0-58f2-4061-9498-c2b1a8da882c": {
+            "id": "d8dca5f0-58f2-4061-9498-c2b1a8da882c",
+            "title": "Hội Thao 2023",
+            "created_at": "2023-04-05 17:38:14",
+            "created_by": "19031998",
+            "from_date": "2023-06-22",
+            "to_date": "2023-07-17",
+            "description": "Đây là mô tả hội thao 2023",
+            "tables": [
+                {
+                    "name": "Bóng đá",
+                    "data": [
+                        {
+                            "key": "c8a7b92e-a199-4eea-92ff-da853b2828d2",
+                            "Mã nhân viên": "000005178417",
+                            "Tên": "Đinh Ngọc Thùy Trang",
+                            "Vị trí": "Trung vệ",
+                            "Số áo": "8"
+                        },
+                        {
+                            "key": "2bb16d76-50e0-4228-b5ab-648d320c52cb",
+                            "Mã nhân viên": "000006556843",
+                            "Tên": "Đỗ Hồng Xuân",
+                            "Vị trí": "Tiền vệ",
+                            "Số áo": "19"
+                        },
+                        {
+                            "key": "3bb980a7-3eb3-433f-9537-3d2d0c945c34",
+                            "Mã nhân viên": "000005178553",
+                            "Tên": "Hồ Anh Kiệt",
+                            "Vị trí": "Trung vệ",
+                            "Số áo": "4"
+                        },
+                        {
+                            "key": "9f20a807-dd86-43f7-9880-90a6fa2f3498",
+                            "Mã nhân viên": "000005180401",
+                            "Tên": "Nguyễn Quang Thoại",
+                            "Vị trí": "Tiền vệ",
+                            "Số áo": "23"
+                        },
+                        {
+                            "key": "a767b33e-e8dd-43b2-b952-2f229d43da58",
+                            "Mã nhân viên": "000005178452",
+                            "Tên": "Nguyễn Như Quỳnh",
+                            "Vị trí": "Trung vệ",
+                            "Số áo": "12"
+                        },
+                        {
+                            "key": "4c2ab5fd-ab6b-4cf5-b795-0211ecbe7b0d",
+                            "Mã nhân viên": "000005178435",
+                            "Tên": "Trương Trung Tín",
+                            "Vị trí": "Trung vệ",
+                            "Số áo": "29"
+                        },
+                        {
+                            "key": "129f990c-af46-4dfa-a3bb-4b3301f11fbf",
+                            "Mã nhân viên": "000005178132",
+                            "Tên": "Lê Hồng Mỹ",
+                            "Vị trí": "Hậu vệ",
+                            "Số áo": "5"
+                        },
+                        {
+                            "key": "534261cc-98e6-427f-9f0d-755a39cbf98e",
+                            "Mã nhân viên": "000005178271",
+                            "Tên": "Võ Ngọc Hải",
+                            "Vị trí": "Tiền vệ",
+                            "Số áo": "22"
+                        }
+                    ],
+                    "table_id": "ab9b88d8-86ed-47c6-a74a-b47281d97538"
+                },
+                {
+                    "name": "Marathon",
+                    "data": [
+                        {
+                            "key": "0",
+                            "Mã nhân viên": "...",
+                            "Tên": "...",
+                            "giới tính": "..."
+                        }
+                    ],
+                    "table_id": "4e4eea51-03fe-4ed4-8039-ae0aaa97b153"
+                }
+            ],
+            "updated_at": "2023-04-13T07:14:19.677Z"
         }
     }
 }

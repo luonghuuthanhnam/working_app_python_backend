@@ -95,17 +95,13 @@ class EventHandler():
         data = self.try_reload_resigted_event_data()
         data[group_id][update_data["id"]] = update_data
         with open(self.registed_event_data_path, 'w', encoding="utf-8") as f:
-            print("FR)")
             json.dump(data, f, ensure_ascii=False, indent=4)
 
     def query_registed_event_data(self, event_id, group_id):
-        print("event_id", event_id)
-        print("group_id", group_id)
         data = self.try_reload_resigted_event_data()
         out_data = None
         try:
             out_data = data[group_id][event_id]
-            print("out_data", out_data)
         except:
             print(f"Cannot query event {event_id} data from {group_id}")
         return out_data
