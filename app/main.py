@@ -212,6 +212,8 @@ class manager_query_table_model(BaseModel):
 async def query_registed_event_data_manager(data: manager_query_table_model):
     # try:
         registed_table_df = eventHandler.get_table_data_by_manager(data.table_id)
+        if registed_table_df.empty:
+            return None
         temp_group_name = registed_table_df["group_id"].apply(
             lambda x: groupData.get_group_name(x)
         )

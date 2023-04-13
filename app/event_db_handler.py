@@ -6,6 +6,7 @@ import datetime
 import json
 from  collections import defaultdict
 import ast
+import numpy as np
 
 class EventDBHandler():
     def __init__(self, excel_data_path) -> None:
@@ -136,8 +137,11 @@ class EventHandler():
                         cur_row["table_id"] = table_id
                         total_table_data[table_id].append(cur_row)
         return total_table_data
-
     def get_table_data_by_manager(self, selected_table_id):
         total_table_data = self.transform_table_data()
         table_df = pd.DataFrame.from_dict(total_table_data[selected_table_id])
-        return table_df
+        no_group_id_table_df = table_df.drop(columns=["group_id", "event_id", "table_id", "key"])
+        no_group_id_table_df = no_group_id_table_df.replace("...", np.nan)
+        no_group_id_table_df.dropna(how="all",inplace=True)
+        cleaned_table_df = table_df.iloc[no_group_id_table_df.index.to_list()]
+        return cleaned_table_df
