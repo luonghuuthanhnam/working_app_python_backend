@@ -29,7 +29,7 @@ origins = [
 ]
 
 # employee_raw_data = pd.read_excel("database/DanhSachThongTinDoanVien.xlsx")
-main_data = pd.read_excel("database/final_employee_data.xlsx")
+main_data = pd.read_excel("database/final_employee_data.xlsx", dtype=str)
 groupData = GroupData("database/group_data.xlsx")
 # main_data = employee_raw_data.iloc[5:]
 
@@ -79,6 +79,11 @@ app.add_middleware(
 @app.get("/")
 def read_root():
     return {"Data_App": "Success"}
+
+@app.get("/imployee/get_all_employee_code")
+async def get_all_employee_code():
+    total_emp_code = main_data[["maso_doanvien", "hovaten"]].to_dict(orient="records")
+    return total_emp_code
 
 
 @app.post("/imployee/query")
@@ -225,12 +230,15 @@ async def query_registed_event_data_manager(data: manager_query_table_model):
     # except Exception as e:
     #     return {"message": "Create event failed"}
 
-# class manager_query_event_data_model (BaseModel):
-#         event_id: str
-# @app.post("/event/query_table_name_in_event")
-# async def query_table_name_in_event(data: manager_query_event_data_model):
-#     tables_name = eventHandler.get_table_names_in_event(data.event_id)
-#     return tables_name
+
+eventDashboardManager = event_db_handler.EventDashboardManager(employee_data_df=main_data, eventHandler=eventHandler, groupData=groupData)
+@app.get("/event/query_total_stat_dashboard")
+async def query_total_stat_dashboard():
+    total_stat = eventDashboardManager.get_total_event_dashboard_stat()
+    return total_stat
+
+
+
 
 if __name__ == "__main__":
     uvicorn.run(

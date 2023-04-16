@@ -109,7 +109,7 @@ def province_distribution(length, main_data, top = -1):
 from login_signup_handler import LoginHandler
 loginHandler = LoginHandler()
 class GroupData():
-    def __init__(self, group_data_excel_path) -> None:
+    def __init__(self, group_data_excel_path= "database/group_data.xlsx") -> None:
         self.group_data_excel_path = group_data_excel_path
         self.group_data_df = pd.read_excel(self.group_data_excel_path)
     
