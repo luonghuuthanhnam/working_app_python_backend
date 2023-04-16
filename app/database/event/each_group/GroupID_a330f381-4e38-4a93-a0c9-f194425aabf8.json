@@ -1,0 +1,216 @@
+{
+    "GroupID_a330f381-4e38-4a93-a0c9-f194425aabf8": {
+        "id": "d8dca5f0-58f2-4061-9498-c2b1a8da882c",
+        "title": "Hội Thao 2023",
+        "created_at": "2023-04-05 17:38:14",
+        "created_by": "19031998",
+        "from_date": "2023-06-22",
+        "to_date": "2023-07-17",
+        "description": "Đây là mô tả hội thao 2023",
+        "tables": [
+            {
+                "name": "Bóng đá",
+                "data": [
+                    {
+                        "key": "c22196f3-9cf3-4b32-a142-a889aa2d508d",
+                        "Mã nhân viên": "000005178307",
+                        "Tên": "Phạm Thị Diệu Huyền",
+                        "Vị trí": "Trung vệ phòng ngự",
+                        "Số áo": "13"
+                    },
+                    {
+                        "key": "1cd4e817-a0d4-4f63-993c-618a2d1ed0c6",
+                        "Mã nhân viên": "000005178361",
+                        "Tên": "Nguyễn Hoàng Ngọc Hân",
+                        "Vị trí": "Tiền đạo",
+                        "Số áo": "10"
+                    },
+                    {
+                        "key": "d8b5a420-839f-41f7-b11f-0e46bef7394a",
+                        "Mã nhân viên": "000005178283",
+                        "Tên": "Võ Hoàng Hà",
+                        "Vị trí": "Hậu vệ",
+                        "Số áo": "15"
+                    },
+                    {
+                        "key": "cf7d2ae7-a7fd-4e5c-bb54-3380d6db1d55",
+                        "Mã nhân viên": "000005178192",
+                        "Tên": "Nguyễn Thị Mỹ Ngọc",
+                        "Vị trí": "Trung phong",
+                        "Số áo": "2"
+                    },
+                    {
+                        "key": "babb1be5-0fb7-4a95-b697-bdfd3ae4be1a",
+                        "Mã nhân viên": "000005180367",
+                        "Tên": "Phạm Xuân Hiền",
+                        "Vị trí": "Tiền vệ",
+                        "Số áo": "17"
+                    },
+                    {
+                        "key": "0352ae91-3e1b-4e1a-9627-160c2dfa6556",
+                        "Mã nhân viên": "000005180388",
+                        "Tên": "Trương Kim Ngân",
+                        "Vị trí": "Trung phong",
+                        "Số áo": "28"
+                    },
+                    {
+                        "key": "6a0d881c-9ba8-492c-8000-c95377c46c45",
+                        "Mã nhân viên": "000005178134",
+                        "Tên": "Võ Viết Thắng",
+                        "Vị trí": "Tiền vệ",
+                        "Số áo": "18"
+                    },
+                    {
+                        "key": "16040b8f-0159-4a05-b236-958188a56642",
+                        "Mã nhân viên": "000005178252",
+                        "Tên": "Trang Chí An",
+                        "Vị trí": "Tiền vệ",
+                        "Số áo": "24"
+                    },
+                    {
+                        "key": "f402f924-c051-41ff-9e8a-924ef2590ce4",
+                        "Mã nhân viên": "000005178406",
+                        "Tên": "Trịnh Thị Thúy Nga",
+                        "Vị trí": "Tiền vệ",
+                        "Số áo": "7"
+                    },
+                    {
+                        "key": "19031998-9",
+                        "Mã nhân viên": "000005178145",
+                        "Tên": "Trương Thị Thiên Thư",
+                        "Vị trí": "Tiền đạo",
+                        "Số áo": "8"
+                    }
+                ],
+                "table_id": "ab9b88d8-86ed-47c6-a74a-b47281d97538"
+            },
+            {
+                "name": "Marathon",
+                "data": [
+                    {
+                        "key": "3b716cad-1f43-44f3-8698-60fa9ebeb345",
+                        "Mã nhân viên": "000005178480",
+                        "Tên": "Huỳnh Lưu Thanh Giang",
+                        "giới tính": "Nữ"
+                    },
+                    {
+                        "key": "c3a7bac2-14df-4dde-9d16-298df4089952",
+                        "Mã nhân viên": "000005180410",
+                        "Tên": "Đặng Ngọc Hiếu",
+                        "giới tính": "Nam"
+                    },
+                    {
+                        "key": "f58992f2-6b9c-467e-b5eb-f36e94a4beeb",
+                        "Mã nhân viên": "000005178492",
+                        "Tên": "Vy Thị Ngân",
+                        "giới tính": "Nữ"
+                    },
+                    {
+                        "key": "a82b1345-53a4-441e-a94f-e77ef3b4d787",
+                        "Mã nhân viên": "000005178127",
+                        "Tên": "Trần Đình Hiệp",
+                        "giới tính": "Nam"
+                    },
+                    {
+                        "key": "1471f359-d900-411e-8af3-8088ca5534d4",
+                        "Mã nhân viên": "000005178218",
+                        "Tên": "Huỳnh Minh Vương",
+                        "giới tính": "Nam"
+                    },
+                    {
+                        "key": "1f1b9478-a576-4e46-802b-2add93f7235b",
+                        "Mã nhân viên": "000005178283",
+                        "Tên": "Võ Hoàng Hà",
+                        "giới tính": "Nam"
+                    },
+                    {
+                        "key": "f03467d4-68a8-4d52-8769-6d23780ff93f",
+                        "Mã nhân viên": "000005178517",
+                        "Tên": "Lý Minh Quân",
+                        "giới tính": "Nam"
+                    },
+                    {
+                        "key": "a4a1e4f7-ef6d-48ec-bcb9-27f86a9126c6",
+                        "Mã nhân viên": "000005180393",
+                        "Tên": "Hồ Thanh Tuyền",
+                        "giới tính": "Nữ"
+                    },
+                    {
+                        "key": "11de3ef5-1964-4787-9710-5d2ed1d4994e",
+                        "Mã nhân viên": "000005178264",
+                        "Tên": "Trương Thanh Lộc",
+                        "giới tính": "Nữ"
+                    },
+                    {
+                        "key": "4c2c5bee-a222-4760-9a4d-c0f8542570ed",
+                        "Mã nhân viên": "000005178426",
+                        "Tên": "Nguyễn Ngọc Anh",
+                        "giới tính": "Nam"
+                    },
+                    {
+                        "key": "6c5a23b8-a63e-4195-8bbe-1f7f1751a68e",
+                        "Mã nhân viên": "000005178156",
+                        "Tên": "Trần Văn Trương",
+                        "giới tính": "Nam"
+                    },
+                    {
+                        "key": "74792c0d-64d6-4a28-981f-8c7bc49730ce",
+                        "Mã nhân viên": "000005180393",
+                        "Tên": "Hồ Thanh Tuyền",
+                        "giới tính": "Nữ"
+                    },
+                    {
+                        "key": "b164834d-ff20-4acb-948a-8403a6043b01",
+                        "Mã nhân viên": "000005178517",
+                        "Tên": "Lý Minh Quân",
+                        "giới tính": "Nam"
+                    },
+                    {
+                        "key": "3588160c-8a81-444b-a953-183d35f55a20",
+                        "Mã nhân viên": "000005178553",
+                        "Tên": "Hồ Anh Kiệt",
+                        "giới tính": "Nam"
+                    },
+                    {
+                        "key": "26beeffc-c7ce-4f50-a4c5-7e91bde9e61a",
+                        "Mã nhân viên": "000005178492",
+                        "Tên": "Vy Thị Ngân",
+                        "giới tính": "Nữ"
+                    },
+                    {
+                        "key": "5078ea0e-4ef7-4be0-ba2d-8db4c97de795",
+                        "Mã nhân viên": "000005178192",
+                        "Tên": "Nguyễn Thị Mỹ Ngọc",
+                        "giới tính": "Nữ"
+                    },
+                    {
+                        "key": "4afc16c3-58a1-419b-b7b3-e4b56f8b2101",
+                        "Mã nhân viên": "000005178108",
+                        "Tên": "Nguyễn Quang Hiếu",
+                        "giới tính": "Nam"
+                    },
+                    {
+                        "key": "350b2c51-172b-4916-88ae-b7dd44865cae",
+                        "Mã nhân viên": "000005178307",
+                        "Tên": "Phạm Thị Diệu Huyền",
+                        "giới tính": "Nữ"
+                    },
+                    {
+                        "key": "037e39ce-41cc-4c65-8548-4f939efdd17d",
+                        "Mã nhân viên": "000005178208",
+                        "Tên": "Nguyễn Thị Thanh Hằng",
+                        "giới tính": "Nữ"
+                    },
+                    {
+                        "key": "035b9419-b448-4cda-b838-9ce2ac1326ee",
+                        "Mã nhân viên": "000005178156",
+                        "Tên": "Trần Văn Trương",
+                        "giới tính": "Nam"
+                    }
+                ],
+                "table_id": "4e4eea51-03fe-4ed4-8039-ae0aaa97b153"
+            }
+        ],
+        "updated_at": "2023-04-16T09:28:14.332Z"
+    }
+}
