@@ -1,0 +1,106 @@
+{
+    "GroupID_990381bf-777a-4622-baba-0695fbf477dd": {
+        "id": "d8dca5f0-58f2-4061-9498-c2b1a8da882c",
+        "title": "Hội Thao 2023",
+        "created_at": "2023-04-05 17:38:14",
+        "created_by": "19031998",
+        "from_date": "2023-06-22",
+        "to_date": "2023-07-17",
+        "description": "Đây là mô tả hội thao 2023",
+        "tables": [
+            {
+                "name": "Bóng đá",
+                "data": [
+                    {
+                        "key": "d9cd6a10-81e6-4e22-94bf-3acc42735d34",
+                        "Mã nhân viên": "000005178514",
+                        "Tên": "Võ Hưng Sơn",
+                        "Vị trí": "Trung phong",
+                        "Số áo": "27"
+                    },
+                    {
+                        "key": "3a0e67f9-db8f-47d6-b8bb-52fa24cc006c",
+                        "Mã nhân viên": "000005178285",
+                        "Tên": "Lê Kim Phượng",
+                        "Vị trí": "Tiền vệ",
+                        "Số áo": "24"
+                    },
+                    {
+                        "key": "c10972aa-f77f-4978-81e5-077df91015a1",
+                        "Mã nhân viên": "000005178203",
+                        "Tên": "Đổng Điền Xuân Hiền",
+                        "Vị trí": "Tiền vệ",
+                        "Số áo": "9"
+                    },
+                    {
+                        "key": "bfd48117-d06f-4fe4-8606-3d14657c6b6f",
+                        "Mã nhân viên": "000005178380",
+                        "Tên": "Trần Nam Hiệp",
+                        "Vị trí": "Thủ môn",
+                        "Số áo": "17"
+                    },
+                    {
+                        "key": "6938db7f-fd22-422d-8bfc-91f1e773cb1a",
+                        "Mã nhân viên": "000006096978",
+                        "Tên": "Võ Thị Mọng Trinh",
+                        "Vị trí": "Thủ môn",
+                        "Số áo": "27"
+                    },
+                    {
+                        "key": "0256af3f-044c-4e09-8b6a-065bb3de364d",
+                        "Mã nhân viên": "000005178188",
+                        "Tên": "Nguyễn Vinh Dự",
+                        "Vị trí": "Trung phong",
+                        "Số áo": "29"
+                    },
+                    {
+                        "key": "b9e5f082-6f8d-4832-a2ca-003ff33a6a54",
+                        "Mã nhân viên": "000005178397",
+                        "Tên": "Võ Thị Kim Ngọc",
+                        "Vị trí": "Trung vệ phòng ngự",
+                        "Số áo": "18"
+                    },
+                    {
+                        "key": "1f072ca2-ec69-427c-9ec0-d918cab719cf",
+                        "Mã nhân viên": "000005178479",
+                        "Tên": "Trần Hữu Chương",
+                        "Vị trí": "Hậu vệ",
+                        "Số áo": "28"
+                    }
+                ],
+                "table_id": "ab9b88d8-86ed-47c6-a74a-b47281d97538"
+            },
+            {
+                "name": "Marathon",
+                "data": [
+                    {
+                        "key": "3cc68ccb-9686-4ef5-8ff5-200b3e452feb",
+                        "Mã nhân viên": "000005178133",
+                        "Tên": "Lê Minh Huyền",
+                        "giới tính": "Nam"
+                    },
+                    {
+                        "key": "ea128d33-afe8-4e63-82ff-e4301fca1f6c",
+                        "Mã nhân viên": "000006556844",
+                        "Tên": "Trần Thị Hà",
+                        "giới tính": "Nữ"
+                    },
+                    {
+                        "key": "ec338346-0881-49ee-a624-8e708e9d3c7f",
+                        "Mã nhân viên": "000005178160",
+                        "Tên": "Nguyễn Văn Đức",
+                        "giới tính": "Nam"
+                    },
+                    {
+                        "key": "dbd4be02-d635-4ff2-8b80-fb782ec99925",
+                        "Mã nhân viên": "000005178150",
+                        "Tên": "Nguyễn Hoàng Tú",
+                        "giới tính": "Nam"
+                    }
+                ],
+                "table_id": "4e4eea51-03fe-4ed4-8039-ae0aaa97b153"
+            }
+        ],
+        "updated_at": "2023-04-16T09:41:04.182Z"
+    }
+}

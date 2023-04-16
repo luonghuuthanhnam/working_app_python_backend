@@ -1,0 +1,81 @@
+{
+    "GroupID_9106a6c0-7ed2-488e-83db-149993c458ba": {
+        "id": "d8dca5f0-58f2-4061-9498-c2b1a8da882c",
+        "title": "Hội Thao 2023",
+        "created_at": "2023-04-05 17:38:14",
+        "created_by": "19031998",
+        "from_date": "2023-06-22",
+        "to_date": "2023-07-17",
+        "description": "Đây là mô tả hội thao 2023",
+        "tables": [
+            {
+                "name": "Bóng đá",
+                "data": [
+                    {
+                        "key": "f324554e-5142-4c7f-b8fb-f9cca79a7741",
+                        "Mã nhân viên": "000005178478",
+                        "Tên": "Nguyễn Thị Minh Trang",
+                        "Vị trí": "Tiền vệ",
+                        "Số áo": "4"
+                    },
+                    {
+                        "key": "ed535b96-d0fc-46fc-a662-96e58addd634",
+                        "Mã nhân viên": "000005180383",
+                        "Tên": "Trương Hồng Minh",
+                        "Vị trí": "Tiền vệ",
+                        "Số áo": "3"
+                    },
+                    {
+                        "key": "c39a1d64-e832-4fff-9b1d-5b1cb7b4c29e",
+                        "Mã nhân viên": "000005178297",
+                        "Tên": "Phạm Huỳnh Trung Nguyên",
+                        "Vị trí": "Tiền vệ",
+                        "Số áo": "15"
+                    },
+                    {
+                        "key": "c2819699-ea78-4ff9-b3ce-b07c9ff2ce2b",
+                        "Mã nhân viên": "000005178297",
+                        "Tên": "Phạm Huỳnh Trung Nguyên",
+                        "Vị trí": "Tiền vệ",
+                        "Số áo": "23"
+                    },
+                    {
+                        "key": "2a732245-77c6-4da6-ab9f-9339e30ca8d2",
+                        "Mã nhân viên": "000005178116",
+                        "Tên": "Đào Thị Thùy Dung",
+                        "Vị trí": "Trung vệ",
+                        "Số áo": "12"
+                    },
+                    {
+                        "key": "6f60ffde-f209-4b1e-9e95-4d468320dc59",
+                        "Mã nhân viên": "000005178457",
+                        "Tên": "Huỳnh Kim Sang",
+                        "Vị trí": "Tiền vệ",
+                        "Số áo": "9"
+                    },
+                    {
+                        "key": "681b0957-80e4-4130-8374-30a5535d10f6",
+                        "Mã nhân viên": "000005178297",
+                        "Tên": "Phạm Huỳnh Trung Nguyên",
+                        "Vị trí": "Thủ môn",
+                        "Số áo": "24"
+                    }
+                ],
+                "table_id": "ab9b88d8-86ed-47c6-a74a-b47281d97538"
+            },
+            {
+                "name": "Marathon",
+                "data": [
+                    {
+                        "key": "0",
+                        "Mã nhân viên": "...",
+                        "Tên": "...",
+                        "giới tính": "..."
+                    }
+                ],
+                "table_id": "4e4eea51-03fe-4ed4-8039-ae0aaa97b153"
+            }
+        ],
+        "updated_at": "2023-04-16T09:41:36.099Z"
+    }
+}

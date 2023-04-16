@@ -94,6 +94,9 @@ class EventHandler():
         return data
     
     def update_event_registing(self, updating_user_id, group_id, update_data):
+        with open(f"database/event/each_group/{group_id}.json", 'w', encoding="utf-8") as f:
+            dump_data = {group_id: update_data}
+            json.dump(dump_data, f, ensure_ascii=False, indent=4)
         data = self.try_reload_resigted_event_data()
         data[group_id][update_data["id"]] = update_data
         with open(self.registed_event_data_path, 'w', encoding="utf-8") as f:
@@ -212,11 +215,21 @@ class EventDashboardManager():
         short_df = total_data_df[["group_id", "Mã nhân viên"]]
         short_df = short_df[short_df["Mã nhân viên"] != "..."]
         group_id_count = short_df["group_id"].value_counts().to_dict()
-        most_joining_group = max(group_id_count, key=group_id_count.get)
-        most_joining_value = group_id_count[most_joining_group]
+        group_names = ["N/A"]*3
+        most_joining_values = ["0"]*3
+        most_joining_groups = sorted(group_id_count, key=group_id_count.get, reverse=True)
+        for i in range(len(most_joining_groups)):
+            if i == 3:
+                break
+            group_names[i] = self.groupData.get_group_name(most_joining_groups[i])
+        
+        for i in range(len(most_joining_groups)):
+            if i == 3:
+                break
+            most_joining_values[i] = str(group_id_count[most_joining_groups[i]])
         mvp_emp_joining_group = {
-            "group_name": self.groupData.get_group_name(most_joining_group),
-            "value": most_joining_value,
+            "group_names": group_names,
+            "values": most_joining_values,
         }
         for each_group_id, each_value in group_id_count.items():
             temp_dict = {}
@@ -243,6 +256,20 @@ class EventDashboardManager():
             # print(f"{self.groupData.get_group_name(each_group_id)}: {len(x.loc[each_group_id])}")
 
 
+        short_df = total_data_df[["Mã nhân viên", "table_id"]]
+        short_df = short_df[short_df["Mã nhân viên"] != "..."]
+        count_df = short_df.groupby('Mã nhân viên').count()
+        top_3_emp = count_df.sort_values(by='table_id', ascending=False).head(3)
+        top_3_emp = top_3_emp.reset_index()
+        top_3_emp_ids = top_3_emp["Mã nhân viên"].tolist()
+        top_3_emp_df = self.get_involved_emp_df(top_3_emp_ids)
+        top_3_emp_names = top_3_emp_df["hovaten"].tolist()
+        top_3_emp_values = top_3_emp["table_id"].tolist()
+        top_3_emp_data = {
+            "emp_names": top_3_emp_names,
+            "values": top_3_emp_values
+        }
+
         output_dict = {
             "total_joining_employee": int(total_joining_employee),
             "total_event": int(total_event),
@@ -252,7 +279,8 @@ class EventDashboardManager():
             "avg_age": round(float(avg_age),1),
             "emp_joining_by_group": joining_emp_by_group,
             "event_joining_by_group": event_joining_by_group,
-            "mvp_emp_joining_group": mvp_emp_joining_group
+            "mvp_emp_joining_group": mvp_emp_joining_group,
+            "top_3_emp_data": top_3_emp_data
             }
         return output_dict
 
