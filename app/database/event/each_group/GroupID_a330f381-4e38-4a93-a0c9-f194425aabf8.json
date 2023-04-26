@@ -80,6 +80,13 @@
                         "Tên": "Trương Thị Thiên Thư",
                         "Vị trí": "Tiền đạo",
                         "Số áo": "8"
+                    },
+                    {
+                        "key": "Row--4cf4f578-2004-4216-b75d-53a3bd47ac48",
+                        "Mã nhân viên": "...",
+                        "Tên": "Giang",
+                        "Vị trí": "...",
+                        "Số áo": "13"
                     }
                 ],
                 "table_id": "ab9b88d8-86ed-47c6-a74a-b47281d97538"
@@ -211,6 +218,6 @@
                 "table_id": "4e4eea51-03fe-4ed4-8039-ae0aaa97b153"
             }
         ],
-        "updated_at": "2023-04-16T09:28:14.332Z"
+        "updated_at": "2023-04-20T12:54:09.015Z"
     }
 }

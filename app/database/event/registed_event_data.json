@@ -81,6 +81,13 @@
                             "Tên": "Trương Thị Thiên Thư",
                             "Vị trí": "Tiền đạo",
                             "Số áo": "8"
+                        },
+                        {
+                            "key": "Row--4cf4f578-2004-4216-b75d-53a3bd47ac48",
+                            "Mã nhân viên": "...",
+                            "Tên": "Giang",
+                            "Vị trí": "...",
+                            "Số áo": "13"
                         }
                     ],
                     "table_id": "ab9b88d8-86ed-47c6-a74a-b47281d97538"
@@ -212,7 +219,7 @@
                     "table_id": "4e4eea51-03fe-4ed4-8039-ae0aaa97b153"
                 }
             ],
-            "updated_at": "2023-04-16T09:28:14.332Z"
+            "updated_at": "2023-04-20T12:54:09.015Z"
         },
         "2696e973-26ca-4ee1-b851-80e652316441": {
             "id": "2696e973-26ca-4ee1-b851-80e652316441",
@@ -483,15 +490,21 @@
                     "data": [
                         {
                             "key": "0",
-                            "Mã nhân viên": "...",
-                            "Tên": "...",
-                            "giới tính": "..."
+                            "Mã nhân viên": "nhanvien01",
+                            "Tên": "Sơn Vũ",
+                            "giới tính": "Nam"
+                        },
+                        {
+                            "key": "Row--c4df0421-3a59-4ee8-a691-d96f568b551d",
+                            "Mã nhân viên": "nhanvien02",
+                            "Tên": "Luân Phan",
+                            "giới tính": "Nam"
                         }
                     ],
                     "table_id": "4e4eea51-03fe-4ed4-8039-ae0aaa97b153"
                 }
             ],
-            "updated_at": "2023-04-16T09:41:36.099Z"
+            "updated_at": "2023-04-16T12:48:40.203Z"
         },
         "2696e973-26ca-4ee1-b851-80e652316441": {
             "id": "2696e973-26ca-4ee1-b851-80e652316441",
@@ -531,6 +544,80 @@
                 }
             ],
             "updated_at": "2023-04-13T16:30:23.586Z"
+        },
+        "cf2018bc-a1ab-4597-9263-c5e7a2a8cac6": {
+            "id": "cf2018bc-a1ab-4597-9263-c5e7a2a8cac6",
+            "title": "Sự kiện demo",
+            "created_at": "2023-04-16 19:50:42",
+            "created_by": "19031998",
+            "from_date": "2023-04-18",
+            "to_date": "2023-04-19",
+            "description": "Mô tả sự kiện demo",
+            "tables": [
+                {
+                    "name": "Nội dung demo",
+                    "data": [
+                        {
+                            "key": "0",
+                            "Mã Nhân Viên": "nhanvientest0138238",
+                            "Tên": "Nam",
+                            "Phần": "Giới thiệu tổng quan",
+                            "Thời gian dự tính": "5 phút"
+                        }
+                    ],
+                    "table_id": "09ed87fe-768f-4999-b4d4-af2e7d064716"
+                },
+                {
+                    "name": "Bảng 2",
+                    "data": [
+                        {
+                            "key": "0",
+                            "Mã Nhân Viên": "...",
+                            "Tên": "...",
+                            "Cột 3": "..."
+                        }
+                    ],
+                    "table_id": "0db23c2f-ace3-429d-94af-2e7cea02b5d7"
+                }
+            ],
+            "updated_at": "2023-04-16T12:53:25.446Z"
+        },
+        "c8984e81-0718-4450-a80a-a9836d8c829c": {
+            "id": "c8984e81-0718-4450-a80a-a9836d8c829c",
+            "title": "Sự kiện 1",
+            "created_at": "2023-04-20 19:17:49",
+            "created_by": "19031998",
+            "from_date": "2023-04-21",
+            "to_date": "2023-04-22",
+            "description": "mô tả",
+            "tables": [
+                {
+                    "name": "bảng 1",
+                    "data": [
+                        {
+                            "key": "0",
+                            "Mã Nhân Viên": "2456",
+                            "Tên": "NAM A",
+                            "cột 1": "a",
+                            "cột 2": "b"
+                        }
+                    ],
+                    "table_id": "4246bfce-78f2-4c94-8625-53af1e99ca43"
+                },
+                {
+                    "name": "bảng 2",
+                    "data": [
+                        {
+                            "key": "0",
+                            "Mã Nhân Viên": "...",
+                            "Tên": "...",
+                            "cột 1": "..."
+                        }
+                    ],
+                    "table_id": "806cd76a-63e4-4ad9-b1c1-3ed6df3df20c"
+                }
+            ],
+            "updated_at": "2023-04-20T12:21:22.413Z"
         }
     },
     "GroupID_f02b7648-cb29-43ec-9ea8-13e942b19de2": {

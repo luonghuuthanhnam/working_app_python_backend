@@ -131,3 +131,6 @@ class GroupData():
             return group_id
         else:
             return None
+    
+    def get_all_group_id_name(self):
+        return self.group_data_df[["group_id", "group_name"]].to_dict(orient="records")

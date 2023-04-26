@@ -156,13 +156,11 @@ class EventHandler():
         event_name = event_data["event_title"].values[0]
         return event_name
 
-
 class EventDashboardManager():
     def __init__(self, employee_data_df, eventHandler, groupData) -> None:
         self.employee_data_df = employee_data_df
         self.eventHandler = eventHandler
         self.groupData = groupData
-
 
     def get_involved_emp_df(self, emp_code_list):
         dfs = [self.employee_data_df[self.employee_data_df['maso_doanvien'] == code] for code in emp_code_list]
@@ -238,7 +236,6 @@ class EventDashboardManager():
             temp_dict["value"] = each_value
             joining_emp_by_group.append(temp_dict)
             # print(f"{self.groupData.get_group_name(each_group_id)}: {each_value}")
-        
 
         #Counting joining event of each group
         event_joining_by_group = []
@@ -255,7 +252,6 @@ class EventDashboardManager():
             event_joining_by_group.append(temp_dict)
             # print(f"{self.groupData.get_group_name(each_group_id)}: {len(x.loc[each_group_id])}")
 
-
         short_df = total_data_df[["Mã nhân viên", "table_id"]]
         short_df = short_df[short_df["Mã nhân viên"] != "..."]
         count_df = short_df.groupby('Mã nhân viên').count()
@@ -269,7 +265,6 @@ class EventDashboardManager():
             "emp_names": top_3_emp_names,
             "values": top_3_emp_values
         }
-
         output_dict = {
             "total_joining_employee": int(total_joining_employee),
             "total_event": int(total_event),
@@ -283,4 +278,3 @@ class EventDashboardManager():
             "top_3_emp_data": top_3_emp_data
             }
         return output_dict
-

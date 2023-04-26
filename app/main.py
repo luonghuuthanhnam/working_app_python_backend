@@ -1,7 +1,8 @@
 import sys
 import os
 import pandas as pd
-from fastapi import FastAPI
+from fastapi import FastAPI, File, UploadFile, HTTPException
+from fastapi.responses import FileResponse
 from pydantic import BaseModel
 import json
 import ssl
@@ -18,8 +19,8 @@ from fastapi.middleware.cors import CORSMiddleware
 import login_signup_handler as login_signup_handler
 import event_db_handler as event_db_handler
 
-# ssl_context = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
-# ssl_context.load_cert_chain("server.crt", "server.key", "server.pem")
+ssl_context = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
+ssl_context.load_cert_chain("server.crt", "server.key", "server.pem")
 # ssl_context.load_cert_chain()
 origins = [
     "http://localhost",
@@ -33,34 +34,6 @@ main_data = pd.read_excel("database/final_employee_data.xlsx", dtype=str)
 groupData = GroupData("database/group_data.xlsx")
 # main_data = employee_raw_data.iloc[5:]
 
-# mapping_cols = {
-#     "stt": "Unnamed: 0",
-#     "maso_doanvien": "Unnamed: 1",
-#     "hovaten": "Unnamed: 2",
-#     "ngaysinh_nam": "Unnamed: 3",
-#     "ngaysinh_nu": "Unnamed: 4",
-#     "tinh": "Unnamed: 5",
-#     "matinh": "Unnamed: 6",
-#     "cmnd": "Unnamed: 7",
-#     "huongluong_ngansach": "Unnamed: 8",
-#     "huongluong_ngoaingansach": "Unnamed: 9",
-#     "khongchuyentrach": "Unnamed: 10",
-#     "chutich": "Unnamed: 11",
-#     "phochutich": "Unnamed: 12",
-#     "uvbch": "Unnamed: 13",
-#     "totruong": "Unnamed: 14",
-#     "topho": "Unnamed: 15",
-#     "cb_cdcs": "Unnamed: 16",
-#     "vuvbkt": "Unnamed: 17",
-#     "ngayvao_congdoan": "Unnamed: 18",
-#     "Unnamed_19": "Unnamed: 19",
-#     "Unnamed_20": "Unnamed: 20",
-#     "Unnamed_21": "Unnamed: 21",
-#     "Unnamed_22": "Unnamed: 22",
-#     "nguyenquan_tinh": "Unnamed: 23",
-#     "nguyenquan_matinh": "Unnamed: 24",
-# }
-# mapping_cols_swap = {v: k for k, v in mapping_cols.items()}
 
 class QueryEmployee(BaseModel):
     length: int
@@ -132,7 +105,7 @@ async def working_app_login(data: LoginData):
         return None
 
 
-class QueryEventList(BaseModel):
+class UserIDModel(BaseModel):
     userId: str
 
 event_db_excel_path = "database/event/event_db.xlsx"
@@ -140,7 +113,7 @@ eventDBHandler = event_db_handler.EventDBHandler(event_db_excel_path)
 
 
 @app.post("/WorkingApp/Event/EventData")
-async def query_event_list(data: QueryEventList):
+async def query_event_list(data: UserIDModel):
     userId = data.userId
     if userId == None:
         return None
@@ -190,13 +163,13 @@ async def upadte_event_handler(data: update_event_data):
         return {"message": "Update event failed"}
 
 
-class query_event_data_model(BaseModel):
+class UserIdGroupIdModel(BaseModel):
     event_id: str
     group_id: str
 
 
 @app.post("/event/query_registed_data")
-async def query_registed_event_data(data: query_event_data_model):
+async def query_registed_event_data(data: UserIdGroupIdModel):
     # try:
         registed_data = eventHandler.query_registed_event_data(
             data.event_id, data.group_id
@@ -238,14 +211,44 @@ async def query_total_stat_dashboard():
     return total_stat
 
 
+@app.post("/upload")
+async def upload_file(file: UploadFile = File(...)):
+    try:
+        print(file.filename)
+        contents = await file.read()
+        file_path = os.path.join("data", file.filename)
+        with open(file_path, "wb") as f:
+            f.write(contents)
+        return {"message": "Upload success", "filename": file.filename, "file_path": file_path}
+    except Exception as e:
+        print(e)
+        raise HTTPException(status_code=500, detail="Upload failed")
+    
+@app.get("/download/{file_path:path}")
+async def download_file(file_path: str):
+    print(file_path)
+    new_path = "data/" + file_path
+    return FileResponse(new_path)
 
+@app.post("/event/get_department_list")
+async def upadte_event_handler(data: UserIDModel):
+    groupData.reload()
+    group_data = groupData.get_all_group_id_name()
+    return group_data
+    # try:
+    #     eventHandler.update_event_registing(data.user_id, data.group_id, data.event_data)
+    #     return {"message": "Update event success"}
+    # except Exception as e:
+    #     return {"message": "Update event failed"}
 
 if __name__ == "__main__":
     uvicorn.run(
         app,
         host="0.0.0.0",
-        port=8005
-        # ssl_version=ssl.PROTOCOL_TLS,
-        # ssl_keyfile="/home/ubuntu/luongnam/working_space/working_app_python_backend/app/server.key",
-        # ssl_certfile="/home/ubuntu/luongnam/working_space/working_app_python_backend/app/server.crt",
+        port=8000,
+        timeout_keep_alive=60,
+        ssl_version=ssl.PROTOCOL_TLS,
+        ssl_keyfile="server.key",
+        ssl_certfile="server.crt",
     )
+
