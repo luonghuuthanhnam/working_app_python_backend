@@ -6,8 +6,8 @@ import datetime
 
 
 def gender_pie_chart(dataframe_input):
-    male_count = dataframe_input["gioitinh"].value_counts()["nam"]
-    female_count = dataframe_input["gioitinh"].value_counts()["nu"]
+    male_count = dataframe_input["gioitinh"].value_counts()["Nam"]
+    female_count = dataframe_input["gioitinh"].value_counts()["Nữ"]
     output_dict = [
         {
             "type": "Nam",

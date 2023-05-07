@@ -18,7 +18,7 @@ from utils import (
 from fastapi.middleware.cors import CORSMiddleware
 import login_signup_handler as login_signup_handler
 import event_db_handler as event_db_handler
-
+import datetime
 ssl_context = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
 ssl_context.load_cert_chain("server.crt", "server.key", "server.pem")
 # ssl_context.load_cert_chain()
@@ -30,7 +30,7 @@ origins = [
 ]
 
 # employee_raw_data = pd.read_excel("database/DanhSachThongTinDoanVien.xlsx")
-main_data = pd.read_excel("database/final_employee_data.xlsx", dtype=str)
+employee_data = pd.read_excel("database/employee_data/final_employee_data.xlsx", dtype=str)
 groupData = GroupData("database/group_data.xlsx")
 # main_data = employee_raw_data.iloc[5:]
 
@@ -55,7 +55,7 @@ def read_root():
 
 @app.get("/imployee/get_all_employee_code")
 async def get_all_employee_code():
-    total_emp_code = main_data[["maso_doanvien", "hovaten"]].to_dict(orient="records")
+    total_emp_code = employee_data[["maso_doanvien", "hovaten"]].to_dict(orient="records")
     return total_emp_code
 
 
@@ -63,18 +63,20 @@ async def get_all_employee_code():
 async def employee_query(data: QueryEmployee):
     length = data.length
     if int(length) == -1:
-        length = len(main_data)
-    result = main_data.iloc[: int(length)]
+        length = len(employee_data)
+    result = employee_data.iloc[: int(length)]
+    result["key"] = result["employee_id"].tolist()
     new_result = result.reset_index(drop=True)
+    new_result = new_result.fillna("...")
     new_result_js = json.loads(new_result.to_json(orient="records"))
     pie_dict = gender_pie_chart(new_result)
 
     joining_by_gender_json = joining_date_by_gender(
-        length, main_data
+        length, employee_data
     )
 
-    age_distribution = cal_age(length, main_data)
-    provice_dis = province_distribution(length, main_data, top=15)
+    age_distribution = cal_age(length, employee_data)
+    provice_dis = province_distribution(length, employee_data, top=15)
     
     output_dict = {
         "main_data": new_result_js,
@@ -84,6 +86,22 @@ async def employee_query(data: QueryEmployee):
         "province_distribution": provice_dis,
     }
     return output_dict
+
+class update_employee_data(BaseModel):
+    employee_data: list
+    user_id: str
+
+@app.post("/imployee/save_emp_data")
+async def save_employee_data(data: update_employee_data):
+    global employee_data
+    backup_fname = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S_%f")
+    employee_data.to_excel(f"database/employee_data/backup_{backup_fname}.xlsx", index=False)
+
+    emp_data = data.employee_data
+    new_emp_df = pd.DataFrame.from_dict(emp_data)
+    new_emp_df = new_emp_df.drop(columns=["key"])
+    new_emp_df.to_excel("database/employee_data/final_employee_data.xlsx", index=False)
+    employee_data = pd.read_excel("database/employee_data/final_employee_data.xlsx", dtype=str)
 
 
 class LoginData(BaseModel):
@@ -204,10 +222,17 @@ async def query_registed_event_data_manager(data: manager_query_table_model):
     #     return {"message": "Create event failed"}
 
 
-eventDashboardManager = event_db_handler.EventDashboardManager(employee_data_df=main_data, eventHandler=eventHandler, groupData=groupData)
+eventDashboardManager = event_db_handler.EventDashboardManager(employee_data_df=employee_data, eventHandler=eventHandler, groupData=groupData)
 @app.get("/event/query_total_stat_dashboard")
 async def query_total_stat_dashboard():
     total_stat = eventDashboardManager.get_total_event_dashboard_stat()
+    return total_stat
+
+@app.post("/event/query_department_stat_dashboard")
+async def query_department_stat_dashboard(data: UserIdGroupIdModel):
+    department_id = data.group_id
+    # total_stat = eventDashboardManager.get_total_event_dashboard_stat()
+    total_stat = eventDashboardManager.get_department_event_dashboard_stat(group_id=department_id)
     return total_stat
 
 

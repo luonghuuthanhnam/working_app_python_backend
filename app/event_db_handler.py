@@ -164,12 +164,15 @@ class EventDashboardManager():
 
     def get_involved_emp_df(self, emp_code_list):
         dfs = [self.employee_data_df[self.employee_data_df['maso_doanvien'] == code] for code in emp_code_list]
-        return pd.concat(dfs)
+        if len(dfs) >0:
+            return pd.concat(dfs)
+        else:
+            return None
 
     def get_gender_ratio(self, input_df):
         gender = input_df["gioitinh"].value_counts()
-        count_male = gender["nam"]
-        count_female = gender["nu"]
+        count_male = gender["Nam"]
+        count_female = gender["Nữ"]
         return count_male, count_female
 
     def get_avg_age(self, input_df):
@@ -179,8 +182,7 @@ class EventDashboardManager():
         avg_age = sum(ages) / len(ages)
         return avg_age
 
-    def get_total_event_dashboard_stat(self):
-
+    def total_data_transformation(self):
         query_event_data = self.eventHandler.query_all_events()
         event_ids = query_event_data["event_id"]
         event_datas = query_event_data["event_data"]
@@ -198,10 +200,107 @@ class EventDashboardManager():
         for each_key, each_data in total_data.items():
                 total_rows+=each_data
         total_data_df = pd.DataFrame.from_dict(total_rows)
+        return total_data_df, total_event, total_table
+
+    def get_total_event_dashboard_stat(self):
+        total_data_df, total_event, total_table = self.total_data_transformation()
+        # total_data_df.to_excel("total_data.xlsx")
         total_joining_emp_code = total_data_df["Mã nhân viên"].tolist()
         total_joining_emp_code = [value for value in total_joining_emp_code if value != "..."]
         joining_emp_df = self.get_involved_emp_df(total_joining_emp_code)
+        if joining_emp_df is None:
+            return None
+        total_joining_employee = len(set(total_data_df["Mã nhân viên"]))
+        # total_event = len(set(total_data_df["event_id"]))
+        # total_table = len(set(total_data_df["table_id"]))
+        male, female = self.get_gender_ratio(joining_emp_df)
+        avg_age = self.get_avg_age(joining_emp_df)
 
+        #Counting joining number of employee in each group
+        joining_emp_by_group = []
+        short_df = total_data_df[["group_id", "Mã nhân viên"]]
+        short_df = short_df[short_df["Mã nhân viên"] != "..."]
+        group_id_count = short_df["group_id"].value_counts().to_dict()
+        group_names = ["N/A"]*3
+        most_joining_values = ["0"]*3
+        most_joining_groups = sorted(group_id_count, key=group_id_count.get, reverse=True)
+        for i in range(len(most_joining_groups)):
+            if i == 3:
+                break
+            group_names[i] = self.groupData.get_group_name(most_joining_groups[i])
+        
+        for i in range(len(most_joining_groups)):
+            if i == 3:
+                break
+            most_joining_values[i] = str(group_id_count[most_joining_groups[i]])
+        mvp_emp_joining_group = {
+            "group_names": group_names,
+            "values": most_joining_values,
+        }
+        for each_group_id, each_value in group_id_count.items():
+            temp_dict = {}
+            group_name = self.groupData.get_group_name(each_group_id)
+            temp_dict["type"] = group_name
+            temp_dict["value"] = each_value
+            joining_emp_by_group.append(temp_dict)
+            # print(f"{self.groupData.get_group_name(each_group_id)}: {each_value}")
+
+        #Counting joining event of each group
+        event_joining_by_group = []
+        short_df = total_data_df[["group_id", "Mã nhân viên", "event_id"]]
+        short_df = short_df[short_df["Mã nhân viên"] != "..."]
+        short_df = short_df[["group_id", "event_id"]]
+        x = short_df.groupby(["group_id", "event_id"]).count()
+        group_ids = short_df["group_id"].unique().tolist()
+        for each_group_id in group_ids:
+            temp_dict = {}
+            group_name = self.groupData.get_group_name(each_group_id)
+            temp_dict["type"] = group_name
+            temp_dict["value"] = len(x.loc[each_group_id])
+            event_joining_by_group.append(temp_dict)
+            # print(f"{self.groupData.get_group_name(each_group_id)}: {len(x.loc[each_group_id])}")
+
+        short_df = total_data_df[["Mã nhân viên", "table_id"]]
+        short_df = short_df[short_df["Mã nhân viên"] != "..."]
+        count_df = short_df.groupby('Mã nhân viên').count()
+        top_3_emp = count_df.sort_values(by='table_id', ascending=False).head(3)
+        top_3_emp = top_3_emp.reset_index()
+        top_3_emp_ids = top_3_emp["Mã nhân viên"].tolist()
+        top_3_emp_df = self.get_involved_emp_df(top_3_emp_ids)
+        top_3_emp_names = top_3_emp_df["hovaten"].tolist()
+        top_3_emp_values = top_3_emp["table_id"].tolist()
+        top_3_emp_data = {
+            "emp_names": top_3_emp_names,
+            "values": top_3_emp_values
+        }
+        output_dict = {
+            "total_joining_employee": int(total_joining_employee),
+            "total_event": int(total_event),
+            "total_table": int(total_table),
+            "male": int(male),
+            "female": int(female),
+            "avg_age": round(float(avg_age),1),
+            "emp_joining_by_group": joining_emp_by_group,
+            "event_joining_by_group": event_joining_by_group,
+            "mvp_emp_joining_group": mvp_emp_joining_group,
+            "top_3_emp_data": top_3_emp_data
+            }
+        return output_dict
+    
+
+    def get_department_event_dashboard_stat(self, group_id):
+        
+        total_data_df, total_event, total_table = self.total_data_transformation()
+        total_data_df = total_data_df[total_data_df["group_id"] == group_id]
+        total_event = len(set(total_data_df["event_id"]))
+        total_table = len(set(total_data_df["table_id"]))
+        # total_data_df.to_excel("total_data.xlsx")
+        total_joining_emp_code = total_data_df["Mã nhân viên"].tolist()
+        total_joining_emp_code = [value for value in total_joining_emp_code if value != "..."]
+        joining_emp_df = self.get_involved_emp_df(total_joining_emp_code)
+        if joining_emp_df is None:
+            return None
+        
         total_joining_employee = len(set(total_data_df["Mã nhân viên"]))
         # total_event = len(set(total_data_df["event_id"]))
         # total_table = len(set(total_data_df["table_id"]))
