@@ -55,7 +55,7 @@ def read_root():
 
 @app.get("/imployee/get_all_employee_code")
 async def get_all_employee_code():
-    total_emp_code = employee_data[["maso_doanvien", "hovaten"]].to_dict(orient="records")
+    total_emp_code = employee_data[["employee_id", "hovaten", "ngaysinh"]].to_dict(orient="records")
     return total_emp_code
 
 
@@ -221,18 +221,24 @@ async def query_registed_event_data_manager(data: manager_query_table_model):
     # except Exception as e:
     #     return {"message": "Create event failed"}
 
+class DashBoardQuery(BaseModel):
+    user_id: str
+    group_id: str
+    time_range: list
 
 eventDashboardManager = event_db_handler.EventDashboardManager(employee_data_df=employee_data, eventHandler=eventHandler, groupData=groupData)
-@app.get("/event/query_total_stat_dashboard")
-async def query_total_stat_dashboard():
-    total_stat = eventDashboardManager.get_total_event_dashboard_stat()
+@app.post("/event/query_total_stat_dashboard")
+async def query_total_stat_dashboard(data: DashBoardQuery):
+    time_range = data.time_range
+    total_stat = eventDashboardManager.get_total_event_dashboard_stat(time_range=time_range)
     return total_stat
 
 @app.post("/event/query_department_stat_dashboard")
-async def query_department_stat_dashboard(data: UserIdGroupIdModel):
+async def query_department_stat_dashboard(data: DashBoardQuery):
     department_id = data.group_id
+    time_range = data.time_range
     # total_stat = eventDashboardManager.get_total_event_dashboard_stat()
-    total_stat = eventDashboardManager.get_department_event_dashboard_stat(group_id=department_id)
+    total_stat = eventDashboardManager.get_department_event_dashboard_stat(group_id=department_id, time_range=time_range)
     return total_stat
 
 

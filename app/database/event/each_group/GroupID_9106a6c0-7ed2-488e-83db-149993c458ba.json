@@ -1,39 +1,39 @@
 {
     "GroupID_9106a6c0-7ed2-488e-83db-149993c458ba": {
-        "id": "c8984e81-0718-4450-a80a-a9836d8c829c",
-        "title": "Sự kiện 1",
-        "created_at": "2023-04-20 19:17:49",
+        "id": "cf2018bc-a1ab-4597-9263-c5e7a2a8cac6",
+        "title": "Sự kiện demo",
+        "created_at": "2023-04-16 19:50:42",
         "created_by": "19031998",
-        "from_date": "2023-04-21",
-        "to_date": "2023-04-22",
-        "description": "mô tả",
+        "from_date": "2023-04-18",
+        "to_date": "2023-04-19",
+        "description": "Mô tả sự kiện demo",
         "tables": [
             {
-                "name": "bảng 1",
-                "data": [
-                    {
-                        "key": "0",
-                        "Mã Nhân Viên": "2456",
-                        "Tên": "NAM A",
-                        "cột 1": "a",
-                        "cột 2": "b"
-                    }
-                ],
-                "table_id": "4246bfce-78f2-4c94-8625-53af1e99ca43"
-            },
-            {
-                "name": "bảng 2",
+                "name": "Nội dung demo",
                 "data": [
                     {
                         "key": "0",
                         "Mã Nhân Viên": "...",
                         "Tên": "...",
-                        "cột 1": "..."
+                        "Phần": "...",
+                        "Thời gian dự tính": "..."
                     }
                 ],
-                "table_id": "806cd76a-63e4-4ad9-b1c1-3ed6df3df20c"
+                "table_id": "09ed87fe-768f-4999-b4d4-af2e7d064716"
+            },
+            {
+                "name": "Bảng 2",
+                "data": [
+                    {
+                        "key": "0",
+                        "Mã Nhân Viên": "...",
+                        "Tên": "...",
+                        "Cột 3": "..."
+                    }
+                ],
+                "table_id": "0db23c2f-ace3-429d-94af-2e7cea02b5d7"
             }
         ],
-        "updated_at": "2023-04-20T12:21:22.413Z"
+        "updated_at": "2023-05-09T02:57:39.247Z"
     }
 }
