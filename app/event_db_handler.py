@@ -183,8 +183,12 @@ class EventDashboardManager():
 
     def get_gender_ratio(self, input_df):
         gender = input_df["gioitinh"].value_counts()
-        count_male = gender["Nam"]
-        count_female = gender["Nữ"]
+        count_male = 0
+        count_female = 0
+        if "Nam" in gender:
+            count_male = gender["Nam"]
+        if "Nữ" in gender:
+            count_female = gender["Nữ"]
         return count_male, count_female
 
     def get_avg_age(self, input_df):
@@ -215,7 +219,7 @@ class EventDashboardManager():
         return total_data_df, total_event, total_table
 
     def filtering_with_date(self, total_data_df, time_range):
-        if time_range[0] == "All":
+        if time_range[0] == "All Time":
             return total_data_df
         else:
             filtered_rows = []
@@ -234,27 +238,23 @@ class EventDashboardManager():
     def get_total_event_dashboard_stat(self, time_range):
         total_data_df, total_event, total_table = self.total_data_transformation()
         total_data_df = self.filtering_with_date(total_data_df, time_range)
+        if total_data_df is None or len(total_data_df) == 0:
+            return None
+        total_data_df = total_data_df[(total_data_df["employee_id"] != "...") & (total_data_df["employee_id"] != None)]
+        if total_data_df is None or len(total_data_df) == 0:
+            return None
         total_event = len(set(total_data_df["event_id"]))
         total_table = len(set(total_data_df["table_id"]))
-        total_data_df.to_excel("total_data2.xlsx")
         total_data_df = total_data_df[total_data_df["Tên"] != "..."]
-        # print("total_data_df", total_data_df)
-        if total_data_df is None:
-            return None
-        # total_data_df.to_excel("total_data.xlsx")
         total_joining_emp_code = total_data_df["employee_id"].tolist()
         total_joining_emp_code = [value for value in total_joining_emp_code if value != "..."]
         joining_emp_df = self.get_involved_emp_df(total_joining_emp_code)
         if joining_emp_df is None:
             return None
-        # if time_range == "All":
-        #     joining_emp_df = 
         total_joining_employee = len(set(total_data_df["employee_id"]))
 
         male, female = self.get_gender_ratio(joining_emp_df)
         avg_age = self.get_avg_age(joining_emp_df)
-
-        #Counting joining number of employee in each group
         joining_emp_by_group = []
         short_df = total_data_df[["group_id", "employee_id"]]
         short_df = short_df[short_df["employee_id"] != "..."]
@@ -330,14 +330,17 @@ class EventDashboardManager():
         total_data_df, total_event, total_table = self.total_data_transformation()
         total_data_df = total_data_df[total_data_df["group_id"] == group_id]
         total_data_df = self.filtering_with_date(total_data_df, time_range)
+        if total_data_df is None or len(total_data_df) == 0:
+            return None
+        total_data_df = total_data_df[(total_data_df["employee_id"] != "...") & (total_data_df["employee_id"] != None)]
+        if total_data_df is None or len(total_data_df) == 0:
+            return None
         total_event = len(set(total_data_df["event_id"]))
         total_table = len(set(total_data_df["table_id"]))
-        total_data_df.to_excel("total_data2.xlsx")
         total_data_df = total_data_df[total_data_df["Tên"] != "..."]
         # print("total_data_df", total_data_df)
         if total_data_df is None:
             return None
-        # total_data_df.to_excel("total_data.xlsx")
         total_joining_emp_code = total_data_df["employee_id"].tolist()
         total_joining_emp_code = [value for value in total_joining_emp_code if value != "..."]
         joining_emp_df = self.get_involved_emp_df(total_joining_emp_code)

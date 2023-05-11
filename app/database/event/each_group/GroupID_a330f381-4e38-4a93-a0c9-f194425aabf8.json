@@ -1,26 +1,39 @@
 {
     "GroupID_a330f381-4e38-4a93-a0c9-f194425aabf8": {
-        "id": "96fb032c-ee81-4297-8d5d-26866becb48b",
-        "title": "Chăm lo hoàn cảnh khó khăn",
-        "created_at": "2023-04-20 20:23:48",
+        "id": "cf2018bc-a1ab-4597-9263-c5e7a2a8cac6",
+        "title": "Sự kiện demo",
+        "created_at": "2023-04-16 19:50:42",
         "created_by": "19031998",
-        "from_date": "2023-04-20",
-        "to_date": "2023-04-21",
-        "description": "Chăm lo",
+        "from_date": "2023-04-18",
+        "to_date": "2023-04-19",
+        "description": "Mô tả sự kiện demo",
         "tables": [
             {
-                "name": "Danh sách hỗ trợ",
+                "name": "Nội dung demo",
+                "data": [
+                    {
+                        "key": "Row--b23c946e-5fac-4c17-bfd6-2342732bb1d3",
+                        "employee_id": "EmployeeID_c0a33fed-3cd6-410e-9228-c060bf1d9fad",
+                        "Tên": "Dương Ngọc Lê",
+                        "Phần": "...",
+                        "Thời gian dự tính": "..."
+                    }
+                ],
+                "table_id": "09ed87fe-768f-4999-b4d4-af2e7d064716"
+            },
+            {
+                "name": "Bảng 2",
                 "data": [
                     {
                         "key": "0",
-                        "Mã Nhân Viên": "...",
+                        "employee_id": "...",
                         "Tên": "...",
-                        "Hoàn cảnh": "..."
+                        "Cột 3": "..."
                     }
                 ],
-                "table_id": "0c0af3e1-04b3-431e-8ea6-cba5c47abf43"
+                "table_id": "0db23c2f-ace3-429d-94af-2e7cea02b5d7"
             }
         ],
-        "updated_at": "2023-05-09T04:05:23.971Z"
+        "updated_at": "2023-05-10T09:24:20.135Z"
     }
 }

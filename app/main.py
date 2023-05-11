@@ -13,7 +13,9 @@ from utils import (
     joining_date_by_gender,
     cal_age,
     province_distribution,
-    GroupData
+    GroupData,
+    working_status,
+    sunburst_total_department,
 )
 from fastapi.middleware.cors import CORSMiddleware
 import login_signup_handler as login_signup_handler
@@ -53,16 +55,10 @@ app.add_middleware(
 def read_root():
     return {"Data_App": "Success"}
 
-@app.get("/imployee/get_all_employee_code")
-async def get_all_employee_code():
-    total_emp_code = employee_data[["employee_id", "hovaten", "ngaysinh"]].to_dict(orient="records")
-    return total_emp_code
-
-
 @app.post("/imployee/query")
 async def employee_query(data: QueryEmployee):
     length = data.length
-    if int(length) == -1:
+    if int(length) <= 0:
         length = len(employee_data)
     result = employee_data.iloc[: int(length)]
     result["key"] = result["employee_id"].tolist()
@@ -77,14 +73,18 @@ async def employee_query(data: QueryEmployee):
 
     age_distribution = cal_age(length, employee_data)
     provice_dis = province_distribution(length, employee_data, top=15)
-    
+    working_status_dict = working_status(length, employee_data)
+    sunburst_data = sunburst_total_department(length, employee_data)
     output_dict = {
         "main_data": new_result_js,
         "pie_chart": pie_dict,
         "joining_by_gender": joining_by_gender_json,
         "age_distribution": age_distribution,
         "province_distribution": provice_dis,
+        "working_status": working_status_dict,
+        "sunburst_data": sunburst_data,
     }
+    
     return output_dict
 
 class update_employee_data(BaseModel):
@@ -94,7 +94,7 @@ class update_employee_data(BaseModel):
 @app.post("/imployee/save_emp_data")
 async def save_employee_data(data: update_employee_data):
     global employee_data
-    backup_fname = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S_%f")
+    backup_fname = datetime.datetime.now().strftime("%Y_%m_%d_%H")
     employee_data.to_excel(f"database/employee_data/backup_{backup_fname}.xlsx", index=False)
 
     emp_data = data.employee_data
@@ -122,6 +122,17 @@ async def working_app_login(data: LoginData):
     else:
         return None
 
+
+class GroupIDModel(BaseModel):
+    groupID: str
+
+@app.post("/imployee/get_all_employee_code")
+async def get_all_employee_code(data: GroupIDModel):
+    groupID = data.groupID
+    print(groupID)
+    group_data = employee_data[employee_data["group_id"] == groupID]
+    total_emp_code = group_data[["employee_id", "hovaten", "ngaysinh"]].to_dict(orient="records")
+    return total_emp_code
 
 class UserIDModel(BaseModel):
     userId: str
@@ -215,6 +226,7 @@ async def query_registed_event_data_manager(data: manager_query_table_model):
         )
         registed_table_df["group_name"] = temp_group_name
         registed_table_df = registed_table_df.drop(columns=["event_id", "table_id", "key", "group_id"])
+        registed_table_df = registed_table_df[(registed_table_df["employee_id"] != None) & (registed_table_df["employee_id"] != "...")]
         # registed_table_df.rename(columns={"group_name": "group_id"}, inplace=True)
         registed_table = registed_table_df.to_dict(orient="records")
         return registed_table
