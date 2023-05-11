@@ -6,8 +6,12 @@ import datetime
 
 
 def gender_pie_chart(dataframe_input):
-    male_count = dataframe_input["gioitinh"].value_counts()["nam"]
-    female_count = dataframe_input["gioitinh"].value_counts()["nu"]
+    male_count = 0
+    female_count = 0
+    if "Nam" in dataframe_input["gioitinh"].value_counts().keys():
+        male_count = dataframe_input["gioitinh"].value_counts()["Nam"]
+    if "Nữ" in dataframe_input["gioitinh"].value_counts().keys():
+        female_count = dataframe_input["gioitinh"].value_counts()["Nữ"]
     output_dict = [
         {
             "type": "Nam",
@@ -63,7 +67,13 @@ def joining_date_by_gender(length, main_data):
     all_genders = df['gioitinh'].unique()
     min_year = df['namvao_congdoan'].min()
     max_year = df['namvao_congdoan'].max()
-    year_range = range(min_year, max_year+1)
+    try:
+
+        year_range = range(min_year, max_year+1)
+    
+    except:
+        print("Error: ", min_year, max_year)
+
     all_years = pd.DataFrame(list(product(all_genders, year_range)), columns=['gioitinh', 'namvao_congdoan'])
 
     # merge with the original DataFrame to fill missing values with 0
@@ -106,6 +116,56 @@ def province_distribution(length, main_data, top = -1):
         result_df = result_df[:top]
     return result_df.to_json(orient="records")
 
+def working_status(length, main_data):
+    result =  main_data.iloc[:int(length)]
+    new_result = result.reset_index(drop=True)
+    new_result["status"] = new_result["status"].replace("0", "Đã nghỉ")
+    new_result["status"] = new_result["status"].replace("1", "Đang làm")
+    result_status = new_result.value_counts("status").reset_index()
+    result_status.columns = ['type', 'value']
+    # print(result_status)
+    result = result_status.to_dict(orient="records")
+    print(result)
+    return result
+
+def sunburst_total_department(length, main_data):
+    grouped_emp_df = main_data.groupby("group_name").apply(lambda x: x.reset_index(drop=True))
+    unique_group = grouped_emp_df["group_name"].unique() 
+    children = []
+    for group_name in unique_group:
+        cur_group_df = grouped_emp_df.loc[group_name]
+        cur_group_df = cur_group_df[["employee_id", "gioitinh"]]
+        cur_group_gender = cur_group_df.value_counts("gioitinh")
+        total_value = sum(cur_group_gender)
+        male_count = 0
+        female_count = 0
+        if "Nam" in cur_group_gender:
+            male_count = cur_group_gender["Nam"]
+        if "Nữ" in cur_group_gender:
+            female_count = cur_group_gender["Nữ"]
+        group_restruct_data = {
+            "name": group_name,
+            "value": total_value,
+            "children": [
+                {
+                "name": "Nam",
+                "value": int(male_count),
+                },
+                {
+                "name": "Nữ",
+                "value": int(female_count),
+                },
+
+            ]
+        }
+        children.append(group_restruct_data)
+
+    total_restructed_data = {
+        "name": "Đơn vị",
+        "children": children
+    }
+    return total_restructed_data
+
 from login_signup_handler import LoginHandler
 loginHandler = LoginHandler()
 class GroupData():
@@ -131,3 +191,6 @@ class GroupData():
             return group_id
         else:
             return None
+    
+    def get_all_group_id_name(self):
+        return self.group_data_df[["group_id", "group_name"]].to_dict(orient="records")

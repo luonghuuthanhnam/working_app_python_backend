@@ -1,0 +1,3 @@
+docker build -t <image_name> .
+docker login
+docker push <image_name>
