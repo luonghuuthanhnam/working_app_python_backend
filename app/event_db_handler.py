@@ -80,11 +80,7 @@ class EventHandler():
     def query_all_events(self):
         self.reload_event_db()
         event_db = self.event_db.copy()
-        if event_db != None:
-            event_db.sort_values("created_at", inplace=True, ascending=False)
-            return event_db.to_dict()
-        else:
-            return None
+        return event_db.to_dict()
     
     def try_reload_resigted_event_data(self):
         try:
