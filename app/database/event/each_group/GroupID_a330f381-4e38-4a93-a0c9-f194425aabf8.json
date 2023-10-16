@@ -1,39 +1,26 @@
 {
     "GroupID_a330f381-4e38-4a93-a0c9-f194425aabf8": {
-        "id": "cf2018bc-a1ab-4597-9263-c5e7a2a8cac6",
-        "title": "Sự kiện demo",
-        "created_at": "2023-04-16 19:50:42",
-        "created_by": "19031998",
-        "from_date": "2023-04-18",
-        "to_date": "2023-04-19",
-        "description": "Mô tả sự kiện demo",
+        "id": "5a0f7fea-d60c-44f1-8418-04d119ab5bd9",
+        "title": "SEAGAMES 23",
+        "created_at": "2023-05-12 17:12:46",
+        "created_by": "12345678",
+        "from_date": "2023-05-19",
+        "to_date": "2023-06-29",
+        "description": "Hội thao công đoàn",
         "tables": [
             {
-                "name": "Nội dung demo",
-                "data": [
-                    {
-                        "key": "Row--b23c946e-5fac-4c17-bfd6-2342732bb1d3",
-                        "employee_id": "EmployeeID_c0a33fed-3cd6-410e-9228-c060bf1d9fad",
-                        "Tên": "Dương Ngọc Lê",
-                        "Phần": "...",
-                        "Thời gian dự tính": "..."
-                    }
-                ],
-                "table_id": "09ed87fe-768f-4999-b4d4-af2e7d064716"
-            },
-            {
-                "name": "Bảng 2",
+                "name": "Support team",
                 "data": [
                     {
                         "key": "0",
-                        "employee_id": "...",
-                        "Tên": "...",
-                        "Cột 3": "..."
+                        "Tên": "Trần Văn Dần",
+                        "Chức vụ": "...",
+                        "employee_id": "EmployeeID_9441341f-2140-401c-aac0-9e9ce088ca1a"
                     }
                 ],
-                "table_id": "0db23c2f-ace3-429d-94af-2e7cea02b5d7"
+                "table_id": "f35d031c-3a67-44a1-8bda-736796c0cc29"
             }
         ],
-        "updated_at": "2023-05-10T09:24:20.135Z"
+        "updated_at": "2023-05-12T17:15:16.187Z"
     }
 }

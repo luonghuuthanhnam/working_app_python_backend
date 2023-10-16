@@ -212,7 +212,7 @@
                     "table_id": "4e4eea51-03fe-4ed4-8039-ae0aaa97b153"
                 }
             ],
-            "updated_at": "2023-05-09T02:53:10.117Z"
+            "updated_at": "2023-05-12T17:10:09.595Z"
         },
         "2696e973-26ca-4ee1-b851-80e652316441": {
             "id": "2696e973-26ca-4ee1-b851-80e652316441",
@@ -320,6 +320,30 @@
                 }
             ],
             "updated_at": "2023-05-10T09:24:20.135Z"
+        },
+        "5a0f7fea-d60c-44f1-8418-04d119ab5bd9": {
+            "id": "5a0f7fea-d60c-44f1-8418-04d119ab5bd9",
+            "title": "SEAGAMES 23",
+            "created_at": "2023-05-12 17:12:46",
+            "created_by": "12345678",
+            "from_date": "2023-05-19",
+            "to_date": "2023-06-29",
+            "description": "Hội thao công đoàn",
+            "tables": [
+                {
+                    "name": "Support team",
+                    "data": [
+                        {
+                            "key": "0",
+                            "Tên": "Trần Văn Dần",
+                            "Chức vụ": "...",
+                            "employee_id": "EmployeeID_9441341f-2140-401c-aac0-9e9ce088ca1a"
+                        }
+                    ],
+                    "table_id": "f35d031c-3a67-44a1-8bda-736796c0cc29"
+                }
+            ],
+            "updated_at": "2023-05-12T17:15:16.187Z"
         }
     },
     "GroupID_990381bf-777a-4622-baba-0695fbf477dd": {

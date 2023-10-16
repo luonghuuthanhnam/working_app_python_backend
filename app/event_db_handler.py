@@ -240,11 +240,11 @@ class EventDashboardManager():
         total_data_df = self.filtering_with_date(total_data_df, time_range)
         if total_data_df is None or len(total_data_df) == 0:
             return None
+        total_event = len(set(total_data_df["event_id"]))
+        total_table = len(set(total_data_df["table_id"]))
         total_data_df = total_data_df[(total_data_df["employee_id"] != "...") & (total_data_df["employee_id"] != None)]
         if total_data_df is None or len(total_data_df) == 0:
             return None
-        total_event = len(set(total_data_df["event_id"]))
-        total_table = len(set(total_data_df["table_id"]))
         total_data_df = total_data_df[total_data_df["Tên"] != "..."]
         total_joining_emp_code = total_data_df["employee_id"].tolist()
         total_joining_emp_code = [value for value in total_joining_emp_code if value != "..."]
